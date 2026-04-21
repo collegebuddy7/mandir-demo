@@ -880,7 +880,7 @@
   <div class="payment-panel active" id="panelScan">
     <div class="qr-section">
       <div class="qr-wrapper">
-        <canvas id="qrCanvas" width="200" height="200"></canvas>
+        <div id="qrCanvas"></div>
       </div>
       <div class="upi-note">
         <i class="fa-solid fa-circle-info"></i>
@@ -995,10 +995,11 @@
 <script>
 // ===== CONFIG =====
 const CONFIG = {
-  UPI_ID: 'YOUR_UPI_ID@bank',       // ← अपना UPI ID यहाँ डालें
-  UPI_NAME: 'रामचौरा मंदिर',
+  UPI_ID: '9955623872@okbizaxis',       // ← अपना UPI ID यहाँ डालें
+//   UPI_NAME: 'रामचौरा मंदिर',
+  UPI_NAME: 'Ganpati Cement Bhandar',
   WHATSAPP_GROUP: 'https://chat.whatsapp.com/YOUR_GROUP_LINK', // ← WhatsApp link
-  APPS_SCRIPT_URL: 'YOUR_APPS_SCRIPT_URL_HERE', // ← Apps Script URL
+  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwQDu7r7_TMXo76Gf1LyFvKmE1r92DsFJPPV3wusIWkelfOEmM0IXTHgRD6Ywu0t1_U5A/exec', // ← Apps Script URL
   BASE_URL: window.location.origin + window.location.pathname,
 };
 
@@ -1188,29 +1189,21 @@ function generateQR() {
   const upiNote = encodeURIComponent('Mandir ' + state.paymentId + ' ' + state.donorPhone);
   const upiString = `upi://pay?pa=${CONFIG.UPI_ID}&pn=${encodeURIComponent(CONFIG.UPI_NAME)}&am=${state.amount}&tn=${upiNote}&cu=INR`;
 
-  const canvas = document.getElementById('qrCanvas');
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, 200, 200);
+  const container = document.getElementById('qrCanvas');
+  container.innerHTML = ""; // clear old QR
 
-  // Use QRCode.js if available, otherwise show text
   if (typeof QRCode !== 'undefined') {
-    try {
-      const qr = new QRCode(canvas, {
-        text: upiString,
-        width: 200,
-        height: 200,
-        colorDark: '#5C0F0F',
-        colorLight: '#FFFFFF',
-        correctLevel: QRCode.CorrectLevel.M
-      });
-    } catch(e) {
-      drawFallbackQR(ctx, upiString);
-    }
+    new QRCode(container, {
+      text: upiString,
+      width: 200,
+      height: 200,
+      colorDark: "#5C0F0F",
+      colorLight: "#FFFFFF",
+      correctLevel: QRCode.CorrectLevel.M
+    });
   } else {
-    drawFallbackQR(ctx, upiString);
+    container.innerHTML = "<p>QR load nahi ho raha</p>";
   }
-  state.qrGenerated = true;
-  state.upiString = upiString;
 }
 
 function drawFallbackQR(ctx, text) {
