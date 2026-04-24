@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>रामचौरा मंदिर — दान पृष्ठ</title>
+<!--
+  IMAGE FILES NEEDED (rename your uploads accordingly):
+  • person1.png  → turbaned man photo
+  • person2.png  → elderly man with documents photo
+  • temple.png   → temple interior photo (for Parichay section)
+  • before.png   → temple current / incomplete state
+  • after.png    → temple imagined / completed state
+
+  CONFIG TO UPDATE (search "CONFIG =" below):
+  • UPI_ID        → your UPI ID
+  • WHATSAPP_GROUP→ your WhatsApp invite link
+  • APPS_SCRIPT_URL→ your deployed Apps Script URL
+  • YOUTUBE_VIDEO → your YouTube video ID (e.g. "dQw4w9WgXcQ")
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ===== VARIABLES ===== */
+:root {
+  --saffron:      #FF6B00;
+  --saffron-lt:   #FF8C33;
+  --saffron-pale: #FFF3E8;
+  --gold:         #D4A017;
+  --gold-lt:      #F5C842;
+  --maroon:       #8B1A1A;
+  --maroon-dk:    #5C0F0F;
+  --cream:        #FDF6EC;
+  --white:        #FFFFFF;
+  --txt-dk:       #2C1810;
+  --txt-md:       #5C3D2E;
+  --txt-lt:       #9B7B6A;
+  --green:        #2D7D46;
+  --shadow:       0 4px 20px rgba(139,26,26,0.10);
+  --shadow-lg:    0 8px 36px rgba(139,26,26,0.16);
+  --radius:       16px;
+  --font-hi:      'Hind', sans-serif;
+  --font-en:      'Poppins', sans-serif;
+}
+*  { margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body {
+  font-family: var(--font-hi);
+  background: var(--cream);
+  color: var(--txt-dk);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed; top:0; left:0; right:0; z-index:1000;
+  height: 56px;
+  background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dk) 100%);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 18px;
+  box-shadow: 0 2px 18px rgba(0,0,0,0.28);
+}
+.navbar-brand {
+  display:flex; align-items:center; gap:9px;
+  color: var(--gold-lt); font-size:1rem; font-weight:700;
+}
+.navbar-brand i { color: var(--saffron-lt); font-size:1.15rem; }
+.btn-nav-wa {
+  display:flex; align-items:center; gap:6px;
+  background: linear-gradient(135deg,#25D366,#128C7E);
+  color:white; border:none; padding:7px 13px; border-radius:24px;
+  font-family:var(--font-hi); font-size:0.82rem; font-weight:600;
+  cursor:pointer; text-decoration:none;
+  box-shadow:0 2px 8px rgba(37,211,102,0.32);
+  transition:transform 0.18s;
+}
+.btn-nav-wa:active { transform:scale(0.97); }
+
+/* ===== SCREENS ===== */
+.screen { display:none; min-height:100vh; padding-top:56px; }
+.screen.active { display:block; }
+
+/* ===== SCREEN 1: LANDING ===== */
+#screen1 { padding-bottom:88px; }
+
+/* Hero */
+.hero-banner {
+  background: linear-gradient(180deg,#4A0A0A 0%,var(--maroon) 48%,var(--saffron) 100%);
+  padding: 26px 20px 34px; text-align:center; position:relative; overflow:hidden;
+}
+.hero-banner::before {
+  content:''; position:absolute; inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L35 20L50 20L38 30L43 45L30 35L17 45L22 30L10 20L25 20Z' fill='rgba(255,255,255,0.022)'/%3E%3C/svg%3E") repeat;
+  animation:bgFloat 28s linear infinite;
+}
+@keyframes bgFloat { to { background-position:60px 60px; } }
+
+.om-sym {
+  font-size:2.8rem; color:var(--gold-lt);
+  text-shadow:0 0 22px rgba(245,200,66,0.5);
+  animation:omPulse 3s ease-in-out infinite;
+  display:block; margin-bottom:7px; position:relative; z-index:1;
+}
+@keyframes omPulse { 50%{transform:scale(1.07);opacity:.88} }
+
+.hero-title {
+  color:var(--gold-lt); font-size:1.75rem; font-weight:700;
+  text-shadow:0 2px 10px rgba(0,0,0,0.35);
+  position:relative; z-index:1; margin-bottom:3px; letter-spacing:.4px;
+}
+.hero-sub {
+  color:rgba(255,255,255,.82); font-size:.9rem;
+  position:relative; z-index:1; font-weight:400;
+}
+.hero-flags { display:flex; justify-content:center; gap:12px; margin-top:14px; position:relative; z-index:1; }
+.flag { font-size:1.3rem; animation:wave 2s ease-in-out infinite; }
+.flag:nth-child(2){animation-delay:.3s} .flag:nth-child(3){animation-delay:.6s}
+@keyframes wave{ 0%,100%{transform:rotate(-5deg)} 50%{transform:rotate(5deg)} }
+
+/* Video */
+.section-wrap { margin:14px 16px 0; }
+.sec-label {
+  font-size:.75rem; color:var(--maroon); font-weight:700;
+  margin-bottom:7px; display:flex; align-items:center; gap:5px;
+  text-transform:uppercase; letter-spacing:.5px;
+}
+.sec-label i { color:var(--saffron); }
+.video-wrap {
+  position:relative; padding-bottom:56.25%; height:0;
+  border-radius:var(--radius); overflow:hidden;
+  box-shadow:var(--shadow-lg); background:#111;
+}
+.video-wrap iframe {
+  position:absolute; top:0; left:0; width:100%; height:100%; border:none;
+}
+
+/* Parichay */
+.parichay-card {
+  margin:14px 16px 0; border-radius:var(--radius);
+  overflow:hidden; box-shadow:var(--shadow-lg); background:white;
+}
+.parichay-img { width:100%; height:100%; object-fit:cover; display:block; }
+.parichay-body {
+  padding:16px 18px 18px; border-left:4px solid var(--saffron);
+}
+.parichay-body h3 {
+  color:var(--maroon); font-size:1rem; font-weight:700;
+  margin-bottom:8px; display:flex; align-items:center; gap:7px;
+}
+.parichay-body h3 i { color:var(--saffron); }
+.parichay-body p { color:var(--txt-md); font-size:.87rem; line-height:1.8; }
+
+/* Section title */
+.sec-title {
+  text-align:center; font-size:1.05rem; color:var(--maroon);
+  padding:20px 20px 8px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.sec-title i { color:var(--saffron); }
+
+/* Flip cards */
+.flip-hint {
+  text-align:center; color:var(--txt-lt); font-size:.75rem;
+  padding:2px 0 10px; display:flex; align-items:center; justify-content:center; gap:4px;
+}
+.flip-grid { display:grid; grid-template-columns:1fr 1fr; gap:13px; padding:0 16px 4px; }
+.flip-card { perspective:1000px; height:195px; cursor:pointer; }
+.flip-inner {
+  position:relative; width:100%; height:100%;
+  transform-style:preserve-3d;
+  transition:transform .65s cubic-bezier(.4,0,.2,1);
+  border-radius:var(--radius);
+}
+.flip-card.flipped .flip-inner { transform:rotateY(180deg); }
+.flip-front,.flip-back {
+  position:absolute; width:100%; height:100%;
+  backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  border-radius:var(--radius); overflow:hidden;
+}
+.flip-front { background:#1a0a0a; }
+.flip-front img { width:100%; height:100%; object-fit:cover; opacity:.82; }
+.flip-front-lbl {
+  position:absolute; bottom:0; left:0; right:0;
+  background:linear-gradient(to top,rgba(0,0,0,.78),transparent);
+  padding:22px 10px 10px; color:white; font-size:.7rem; text-align:center;
+}
+.flip-back {
+  transform:rotateY(180deg);
+  background:linear-gradient(135deg,var(--saffron-pale),var(--cream));
+  border:2px solid var(--gold);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:13px; text-align:center;
+}
+.flip-back img { width:100%; height:126px; object-fit:cover; border-radius:10px; margin-bottom:8px; }
+.flip-back-txt { font-size:.7rem; color:var(--maroon); font-weight:700; line-height:1.4; }
+
+/* Needs list */
+.needs-card {
+  background:white; margin:14px 16px 0;
+  border-radius:var(--radius); padding:18px; box-shadow:var(--shadow);
+}
+.needs-head { font-size:.94rem; color:var(--maroon); font-weight:700; margin-bottom:12px; display:flex; align-items:center; gap:6px; }
+.needs-list { list-style:none; }
+.needs-list li {
+  display:flex; align-items:center; gap:10px;
+  padding:7px 0; border-bottom:1px solid var(--saffron-pale);
+  font-size:.84rem; color:var(--txt-md);
+}
+.needs-list li:last-child { border-bottom:none; }
+.needs-list li i { color:var(--saffron); width:18px; text-align:center; }
+.badge {
+  margin-left:auto; font-size:.69rem; font-weight:700;
+  padding:3px 8px; border-radius:20px; font-family:var(--font-en);
+}
+.badge.pending { background:#FFF3CD; color:#856404; }
+.badge.progress { background:#D1ECF1; color:#0C5460; }
+
+/* People swipe */
+.people-scroll {
+  display:flex; gap:14px; overflow-x:auto;
+  scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+  padding: 0 16px 10px; scrollbar-width:none;
+}
+.people-scroll::-webkit-scrollbar { display:none; }
+.person-card {
+  flex:0 0 215px; scroll-snap-align:start;
+  background:white; border-radius:var(--radius);
+  overflow:hidden; box-shadow:var(--shadow);
+  border-top:3px solid var(--gold);
+}
+.person-card img {
+  width:100%; height:265px;
+  object-fit:cover; object-position:top; display:block;
+}
+.person-body { padding:11px 13px 14px; }
+.person-name { font-size:.9rem; font-weight:700; color:var(--maroon); margin-bottom:3px; }
+.person-post {
+  display:inline-block; background:var(--saffron-pale);
+  color:var(--saffron); font-size:.68rem; font-weight:600;
+  padding:2px 8px; border-radius:20px; margin-bottom:8px;
+  font-family:var(--font-en);
+}
+.person-para { font-size:.77rem; color:var(--txt-md); line-height:1.6; }
+
+/* Group banner */
+.group-banner {
+  background:linear-gradient(135deg,#075E54,#128C7E);
+  margin:14px 16px 0; border-radius:var(--radius);
+  padding:15px 17px; display:flex; align-items:center; gap:13px;
+  text-decoration:none;
+  box-shadow:0 4px 14px rgba(7,94,84,0.28);
+  transition:transform .18s;
+}
+.group-banner:active { transform:scale(0.98); }
+.group-banner .wa-ico { font-size:1.85rem; color:#25D366; }
+.gb-text { flex:1; }
+.gb-text h4 { color:white; font-size:.9rem; font-weight:700; margin-bottom:2px; }
+.gb-text p { color:rgba(255,255,255,.7); font-size:.75rem; }
+.gb-arrow { color:white; font-size:1.1rem; }
+
+/* Sticky donate */
+.sticky-donate {
+  position:fixed; bottom:0; left:0; right:0;
+  padding:11px 16px;
+  background:rgba(253,246,236,0.96); backdrop-filter:blur(12px);
+  box-shadow:0 -4px 18px rgba(139,26,26,0.12); z-index:999;
+}
+.btn-donate-main {
+  width:100%;
+  background:linear-gradient(135deg,var(--saffron) 0%,var(--maroon) 100%);
+  color:white; border:none; padding:15px;
+  border-radius:14px; font-family:var(--font-hi);
+  font-size:1.08rem; font-weight:700; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  box-shadow:0 4px 16px rgba(255,107,0,0.38);
+  transition:transform .15s; letter-spacing:.3px;
+}
+.btn-donate-main:active { transform:scale(0.98); }
+
+/* ===== COMMON FORM STYLES ===== */
+.page-header {
+  background:linear-gradient(135deg,var(--maroon),var(--maroon-dk));
+  padding:0 18px; display:flex; align-items:center; gap:12px;
+  color:white; height:56px; position:sticky; top:56px; z-index:100;
+}
+.page-header .back-ico {
+  background:rgba(255,255,255,.12); border:none; border-radius:8px;
+  width:34px; height:34px; display:flex; align-items:center; justify-content:center;
+  color:white; font-size:1rem; cursor:pointer; transition:background .2s; flex-shrink:0;
+}
+.page-header .back-ico:hover { background:rgba(255,255,255,.2); }
+.page-header-text h2 { font-size:1.05rem; font-weight:700; margin-bottom:1px; }
+.page-header-text p  { font-size:.78rem; opacity:.75; }
+
+.form-body { padding:18px 16px 30px; }
+.form-group { margin-bottom:15px; }
+.form-group label {
+  display:flex; align-items:center; gap:6px;
+  font-size:.85rem; color:var(--maroon); font-weight:700; margin-bottom:7px;
+}
+.form-group label i { color:var(--saffron); font-size:.86rem; }
+.form-control {
+  width:100%; background:white; border:2px solid #EDD5BB;
+  border-radius:12px; padding:12px 14px; font-size:.95rem;
+  font-family:var(--font-hi); color:var(--txt-dk);
+  transition:border-color .2s; outline:none;
+}
+.form-control:focus { border-color:var(--saffron); box-shadow:0 0 0 3px rgba(255,107,0,0.1); }
+
+.amount-chips {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:10px;
+}
+.chip {
+  background:white; border:2px solid #EDD5BB;
+  border-radius:10px; padding:10px 6px; text-align:center; cursor:pointer;
+  font-family:var(--font-hi); font-size:.9rem; font-weight:700;
+  color:var(--txt-dk); transition:all .18s;
+}
+.chip.selected {
+  background:var(--saffron); border-color:var(--saffron);
+  color:white; box-shadow:0 2px 10px rgba(255,107,0,0.28);
+}
+.chip:hover:not(.selected) { border-color:var(--saffron); color:var(--saffron); }
+
+.btn-primary {
+  width:100%; background:linear-gradient(135deg,var(--saffron),var(--maroon));
+  color:white; border:none; padding:15px; border-radius:14px;
+  font-family:var(--font-hi); font-size:1.05rem; font-weight:700; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  box-shadow:0 4px 16px rgba(255,107,0,0.36); transition:transform .15s; margin-top:6px;
+}
+.btn-primary:active { transform:scale(0.98); }
+.btn-green {
+  width:100%; background:linear-gradient(135deg,var(--green),#1a5c32);
+  color:white; border:none; padding:14px; border-radius:12px;
+  font-family:var(--font-hi); font-size:1rem; font-weight:700; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  box-shadow:0 4px 13px rgba(45,125,70,0.32); transition:transform .15s;
+}
+.btn-green:active { transform:scale(0.98); }
+
+/* ===== SCREEN 3: PAYMENT ===== */
+.pay-summary {
+  background:white; margin:14px 16px 12px; border-radius:var(--radius);
+  padding:14px 16px; display:flex; align-items:center; justify-content:space-between;
+  box-shadow:var(--shadow); border:2px solid var(--gold);
+}
+.pay-label { font-size:.76rem; color:var(--txt-lt); margin-bottom:2px; }
+.pay-amount { font-size:1.65rem; font-weight:700; color:var(--maroon); font-family:var(--font-en); }
+.pay-id     { font-size:1rem;   font-weight:700; color:var(--maroon); font-family:var(--font-en); }
+
+.timer-bar {
+  margin:0 16px 12px;
+  background:linear-gradient(135deg,#FFF8E1,#FFF3E0);
+  border:2px solid var(--gold); border-radius:12px;
+  padding:10px 13px; display:flex; align-items:center; gap:10px;
+}
+.timer-ico { font-size:1.4rem; color:var(--gold); animation:tick 1s step-end infinite; }
+@keyframes tick { 50%{opacity:.4} }
+.timer-lbl { font-size:.73rem; color:var(--txt-lt); }
+.timer-val { font-size:1.25rem; font-weight:700; color:var(--maroon); font-family:var(--font-en); }
+.timer-val.urgent { color:#E53E3E; animation:blink .5s ease infinite; }
+@keyframes blink { 50%{opacity:.5} }
+.btn-refresh {
+  margin-left:auto; background:var(--saffron-pale); border:1px solid var(--saffron);
+  color:var(--saffron); padding:5px 9px; border-radius:8px;
+  font-size:.72rem; cursor:pointer; font-family:var(--font-hi); transition:all .2s;
+}
+
+.pay-tabs {
+  display:flex; margin:0 16px 12px;
+  background:#EDD5BB; border-radius:12px; padding:4px; gap:4px;
+}
+.pay-tab {
+  flex:1; padding:9px; border:none; background:none; border-radius:10px;
+  font-family:var(--font-hi); font-size:.85rem; color:var(--txt-md); cursor:pointer;
+  transition:all .2s; display:flex; align-items:center; justify-content:center; gap:5px;
+}
+.pay-tab.active { background:white; color:var(--maroon); font-weight:700; box-shadow:0 2px 8px rgba(0,0,0,.1); }
+
+.pay-panel { display:none; }
+.pay-panel.active { display:block; }
+
+.qr-box {
+  background:white; margin:0 16px 12px;
+  border-radius:var(--radius); padding:20px; text-align:center; box-shadow:var(--shadow);
+}
+.qr-wrap {
+  display:inline-block; padding:10px; background:white;
+  border:3px solid var(--gold); border-radius:12px;
+  box-shadow:0 4px 14px rgba(212,160,23,0.16); margin-bottom:14px;
+}
+#qrCanvas { display:block; }
+
+.notes-row {
+  background:var(--saffron-pale); border:1.5px dashed var(--saffron);
+  border-radius:10px; padding:10px 13px; margin-bottom:14px;
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+}
+.notes-lbl { font-size:.7rem; color:var(--txt-lt); margin-bottom:2px; }
+.notes-val { font-size:.9rem; font-weight:700; color:var(--maroon); font-family:var(--font-en); letter-spacing:.3px; }
+.btn-copy-sm {
+  background:var(--saffron); color:white; border:none;
+  padding:6px 10px; border-radius:7px; font-size:.7rem; cursor:pointer;
+  white-space:nowrap; display:flex; align-items:center; gap:4px;
+  font-family:var(--font-hi); transition:background .2s; flex-shrink:0;
+}
+.btn-copy-sm.copied { background:var(--green); }
+
+.upi-panel {
+  background:white; margin:0 16px 12px;
+  border-radius:var(--radius); padding:18px; box-shadow:var(--shadow);
+}
+.upi-row {
+  background:var(--saffron-pale); border:2px dashed var(--saffron);
+  border-radius:10px; padding:13px;
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;
+}
+.upi-id { font-size:.98rem; font-weight:700; color:var(--maroon); font-family:var(--font-en); }
+.btn-copy-upi {
+  background:var(--saffron); color:white; border:none;
+  padding:7px 11px; border-radius:8px; font-family:var(--font-hi); font-size:.78rem;
+  cursor:pointer; display:flex; align-items:center; gap:4px; transition:background .2s;
+}
+.btn-copy-upi.copied { background:var(--green); }
+
+.steps { list-style:none; margin:10px 0 13px; }
+.steps li { display:flex; align-items:flex-start; gap:9px; padding:5px 0; font-size:.81rem; color:var(--txt-md); }
+.step-n {
+  width:20px; height:20px; border-radius:50%; background:var(--saffron); color:white;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.67rem; font-weight:700; flex-shrink:0; font-family:var(--font-en);
+}
+
+.panel-footer { padding:0 16px 16px; }
+
+/* ===== SCREEN 4: UTR ===== */
+.utr-card {
+  background:white; margin:16px;
+  border-radius:var(--radius); padding:24px 20px; box-shadow:var(--shadow);
+}
+.utr-icon-wrap { text-align:center; margin-bottom:13px; }
+.utr-icon-wrap i { font-size:2.7rem; color:var(--gold); }
+.utr-title { text-align:center; font-size:1rem; color:var(--maroon); font-weight:700; margin-bottom:5px; }
+.utr-sub { text-align:center; font-size:.79rem; color:var(--txt-lt); margin-bottom:18px; line-height:1.6; }
+.utr-input {
+  width:100%; padding:13px 14px; border:2px solid #EDD5BB; border-radius:12px;
+  font-size:1rem; font-family:var(--font-en); color:var(--txt-dk); outline:none;
+  text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;
+}
+.utr-input:focus { border-color:var(--saffron); box-shadow:0 0 0 3px rgba(255,107,0,0.1); }
+
+/* ===== SCREEN 5: SUCCESS ===== */
+.success-card {
+  background:white; margin:16px;
+  border-radius:var(--radius); padding:26px 20px; text-align:center; box-shadow:var(--shadow);
+}
+.success-anim {
+  width:74px; height:74px; border-radius:50%;
+  background:linear-gradient(135deg,var(--green),#1a5c32);
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto 13px;
+  box-shadow:0 4px 16px rgba(45,125,70,0.32);
+  animation:bounceIn .5s cubic-bezier(.4,0,.2,1);
+}
+@keyframes bounceIn { 0%{transform:scale(0)} 60%{transform:scale(1.08)} 100%{transform:scale(1)} }
+.success-anim i { font-size:2.2rem; color:white; }
+.success-title { font-size:1.3rem; color:var(--maroon); font-weight:700; margin-bottom:5px; }
+.pid-badge {
+  display:inline-block; background:var(--saffron-pale);
+  border:2px solid var(--gold); border-radius:10px;
+  padding:7px 16px; margin:9px 0;
+  font-family:var(--font-en); font-size:.97rem; font-weight:700; color:var(--maroon);
+}
+.success-msg { font-size:.85rem; color:var(--txt-md); line-height:1.78; }
+
+.share-btns { padding:0 16px 32px; display:flex; flex-direction:column; gap:10px; }
+.btn-share {
+  display:flex; align-items:center; justify-content:center; gap:9px;
+  padding:14px; border-radius:12px; border:none;
+  font-family:var(--font-hi); font-size:.95rem; font-weight:700;
+  cursor:pointer; text-decoration:none; transition:transform .15s;
+}
+.btn-share:active { transform:scale(0.98); }
+.btn-share-ref { background:linear-gradient(135deg,var(--saffron),#CC3700); color:white; box-shadow:0 4px 13px rgba(255,107,0,0.3); }
+.btn-share-wa  { background:linear-gradient(135deg,#25D366,#128C7E); color:white; box-shadow:0 4px 13px rgba(37,211,102,0.3); }
+.btn-share-new { background:transparent; border:2px solid var(--maroon) !important; color:var(--maroon); }
+
+/* ===== TOAST ===== */
+.toast {
+  position:fixed; bottom:76px; left:50%; transform:translateX(-50%) translateY(20px);
+  background:var(--txt-dk); color:white;
+  padding:9px 18px; border-radius:24px;
+  font-family:var(--font-hi); font-size:.85rem;
+  opacity:0; transition:all .3s; z-index:9999; white-space:nowrap; pointer-events:none;
+}
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* Spacer */
+.spacer { height:20px; }
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="navbar-brand">
+    <i class="fa-solid fa-om"></i>
+    <span>जय श्री राम</span>
+  </div>
+  <a href="#" id="navWaBtn" target="_blank" class="btn-nav-wa" onclick="trackEvent('group_click')">
+    <i class="fa-brands fa-whatsapp"></i> ग्रुप
+  </a>
+</nav>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+
+<!-- ============================================================
+     SCREEN 1 · LANDING
+     ============================================================ -->
+<div class="screen active" id="screen1">
+
+  <!-- Hero -->
+  <!-- <div class="hero-banner">
+    <span class="om-sym">ॐ</span>
+    <h1 class="hero-title">रामचौरा मंदिर</h1>
+    <p class="hero-sub">रम्भदरा, हाजीपुर, वैशाली · बिहार</p>
+    <div class="hero-flags">
+      <span class="flag">🚩</span><span class="flag">🚩</span><span class="flag">🚩</span>
+    </div>
+  </div> -->
+
+  <!-- YouTube Video -->
+  <div class="section-wrap">
+    <div class="sec-label"><i class="fa-solid fa-video"></i> मंदिर की झलक</div>
+    <div class="video-wrap">
+      <!-- Replace YOUR_VIDEO_ID with your YouTube video ID -->
+     <iframe width="560" height="315" src="https://www.youtube.com/embed/nOny0SBONhw?si=vt5T1Ys8h2_Tt4Fh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- Mandir Parichay -->
+  <div class="parichay-card">
+    <!-- Replace temple.png with your temple interior / exterior photo -->
+    <img src="mandir.png" alt="रामचौरा मंदिर" class="parichay-img"
+         onerror="this.style.background='linear-gradient(135deg,#8B1A1A,#FF6B00)';this.style.height='80px';">
+    <div class="parichay-body">
+      <h3><i class="fa-solid fa-place-of-worship"></i> मंदिर का परिचय</h3>
+      <p>
+        रामचौरा मंदिर बिहार के हाजीपुर (वैशाली जिले) में स्थित एक प्रसिद्ध हिंदू मंदिर है।
+        यह मंदिर भगवान राम को समर्पित है। स्थानीय मान्यता के अनुसार, भगवान राम जनकपुर जाते
+        समय इस स्थान पर रुके थे और उनके पावन चरण-चिह्न यहाँ उपस्थित हैं, जो मंदिर के
+        मुख्य आराध्य हैं। रामनवमी पर यहाँ विशाल मेले का आयोजन होता है।
+      </p>
+    </div>
+  </div>
+
+  <!-- Before / After -->
+  <div class="sec-title"><i class="fa-solid fa-rotate"></i> मंदिर — अभी और कल</div>
+  <p class="flip-hint"><i class="fa-solid fa-hand-pointer"></i>&nbsp;तस्वीर पर क्लिक करें</p>
+  <div class="flip-grid">
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <!-- before.png = current incomplete state -->
+          <img src="before.png" alt="वर्तमान स्थिति"
+               onerror="this.style.display='none';this.parentElement.style.background='#5C0F0F';">
+          <div class="flip-front-lbl">वर्तमान स्थिति (अधूरा निर्माण)</div>
+        </div>
+        <div class="flip-back">
+          <img src="after.png" alt="भविष्य"
+               onerror="this.style.display='none';">
+          <div class="flip-back-txt">🌟 आपके सहयोग से ऐसा जल्द बन सकता है!</div>
+        </div>
+      </div>
+    </div>
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <!-- after.png = imagined completed state -->
+          <img src="after.png" alt="पूर्ण मंदिर"
+               onerror="this.style.display='none';this.parentElement.style.background='#5C0F0F';">
+          <div class="flip-front-lbl">पूर्ण मंदिर की कल्पना</div>
+        </div>
+        <div class="flip-back">
+          <img src="before.png" alt="अभी"
+               onerror="this.style.display='none';">
+          <div class="flip-back-txt">🏗️ अभी निर्माण जारी है — आपकी मदद चाहिए</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Adhure Karya -->
+  <div class="needs-card">
+    <p class="needs-head"><i class="fa-solid fa-triangle-exclamation" style="color:var(--saffron)"></i> अधूरे कार्य</p>
+    <ul class="needs-list">
+      <li><i class="fa-solid fa-paintbrush"></i>   मंदिर की पुताई एवं सजावट                <span class="badge pending">बाकी है</span></li>
+      <li><i class="fa-solid fa-door-open"></i>    मुख्य द्वार एवं प्रवेश निर्माण          <span class="badge pending">बाकी है</span></li>
+      <li><i class="fa-solid fa-lightbulb"></i>   बिजली एवं लाइटिंग व्यवस्था              <span class="badge progress">जारी है</span></li>
+      <li><i class="fa-solid fa-trowel-bricks"></i>फर्श और संगमरमर का काम                 <span class="badge pending">बाकी है</span></li>
+      <li><i class="fa-solid fa-faucet"></i>       जल आपूर्ति एवं शौचालय                   <span class="badge pending">बाकी है</span></li>
+      <li><i class="fa-solid fa-bell"></i>          घंटा एवं धार्मिक उपकरण                  <span class="badge progress">जारी है</span></li>
+    </ul>
+  </div>
+
+  
+
+  <!-- Important People -->
+  <div class="sec-title" style="padding-bottom:10px;">
+    <i class="fa-solid fa-users"></i> मंदिर निर्माण पूरा करने में महत्वपूर्ण योगदानकर्ता
+  </div>
+  <div class="people-scroll">
+    <!--
+      person1.png → turbaned man photo (ChatGPT_Image_Apr_23__2026__09_30_36_PM.png)
+      person2.png → elderly man photo  (ChatGPT_Image_Apr_23__2026__09_30_50_PM.png)
+      Update names / posts / paras as needed
+    -->
+    <div class="person-card">
+      <img src="rajeev.png" alt="राजीव ब्रह्मर्षि"
+           onerror="this.style.height='60px';this.style.background='var(--saffron-pale)';">
+      <div class="person-body">
+        <div class="person-name">राजीव ब्रह्मर्षि</div>
+        <span class="person-post">हिन्दू पुत्र - संस्थापक</span>
+        <p class="person-para">मंदिर का अधुरा निर्माण पूरा करने का संकल्प लिया है, जब तक प्लास्टर न हो जाए चप्पल न पहनने का प्रण लिया है |</p>
+      </div>
+    </div>
+    <!-- Add more person-card blocks here as needed -->
+  </div>
+
+
+  <!-- Sticky Donate Button -->
+  <div class="sticky-donate">
+    <button class="btn-donate-main" onclick="onDaanClick()">
+      <i class="fa-solid fa-hand-holding-heart"></i>
+      दान करें — मंदिर निर्माण में सहयोग
+    </button>
+  </div>
+</div><!-- /screen1 -->
+
+
+<!-- ============================================================
+     SCREEN 2 · DONOR DETAILS
+     ============================================================ -->
+<div class="screen" id="screen2">
+  <div class="page-header">
+    <button class="back-ico" onclick="goToScreen(1)"><i class="fa-solid fa-arrow-left"></i></button>
+    <div class="page-header-text">
+      <h2>दानकर्ता विवरण</h2>
+      <p>कृपया अपनी जानकारी भरें</p>
+    </div>
+  </div>
+
+  <div class="form-body">
+    <div class="form-group">
+      <label><i class="fa-solid fa-user"></i> आपका नाम *</label>
+      <input type="text" class="form-control" id="donorName" placeholder="जैसे: राम कुमार शर्मा">
+    </div>
+    <div class="form-group">
+      <label><i class="fa-solid fa-phone"></i> मोबाइल नंबर *</label>
+      <input type="tel" class="form-control" id="donorPhone" placeholder="10 अंकों का नंबर" maxlength="10" pattern="[0-9]{10}">
+    </div>
+    <div class="form-group">
+      <label><i class="fa-solid fa-location-dot"></i> पता (वैकल्पिक)</label>
+      <input type="text" class="form-control" id="donorAddress" placeholder="गाँव / शहर / जिला">
+    </div>
+    <div class="form-group">
+      <label><i class="fa-solid fa-indian-rupee-sign"></i> दान राशि *</label>
+      <div class="amount-chips">
+        <div class="chip" onclick="selectChip(101,this)">₹101</div>
+        <div class="chip" onclick="selectChip(201,this)">₹201</div>
+        <div class="chip" onclick="selectChip(501,this)">₹501</div>
+        <div class="chip" onclick="selectChip(1001,this)">₹1001</div>
+        <div class="chip" onclick="selectChip(5001,this)">₹5001</div>
+        <div class="chip" onclick="selectChip(11111,this)">₹11111</div>
+      </div>
+      <input type="number" class="form-control" id="donorAmount" placeholder="या अपनी राशि दर्ज करें..." min="1" oninput="onManualAmount()">
+    </div>
+    <button class="btn-primary" onclick="proceedToPayment()">
+      <i class="fa-solid fa-arrow-right"></i> भुगतान पृष्ठ पर जाएँ
+    </button>
+  </div>
+</div><!-- /screen2 -->
+
+
+<!-- ============================================================
+     SCREEN 3 · PAYMENT
+     ============================================================ -->
+<div class="screen" id="screen3">
+  <div class="page-header">
+    <button class="back-ico" onclick="goBackToForm()"><i class="fa-solid fa-arrow-left"></i></button>
+    <div class="page-header-text">
+      <h2>भुगतान करें</h2>
+      <p>UPI से सुरक्षित दान</p>
+    </div>
+  </div>
+
+  <!-- Amount + ID -->
+  <div class="pay-summary">
+    <div>
+      <div class="pay-label">दान राशि</div>
+      <div class="pay-amount">₹<span id="displayAmount">0</span></div>
+    </div>
+    <div style="text-align:right">
+      <div class="pay-label">भुगतान ID</div>
+      <div class="pay-id" id="displayPaymentId">—</div>
+    </div>
+  </div>
+
+  <!-- Timer -->
+  <div class="timer-bar">
+    <i class="fa-regular fa-clock timer-ico"></i>
+    <div>
+      <div class="timer-lbl">QR समय सीमा</div>
+      <div class="timer-val" id="timerDisplay">05:00</div>
+    </div>
+    <button class="btn-refresh" onclick="restartTimer()">
+      <i class="fa-solid fa-rotate-right"></i> नया QR
+    </button>
+  </div>
+
+  <!-- Tabs -->
+  <div class="pay-tabs">
+    <button class="pay-tab active" onclick="switchTab('scan')" id="tabScan">
+      <i class="fa-solid fa-qrcode"></i> Scan & Pay
+    </button>
+    <button class="pay-tab" onclick="switchTab('copy')" id="tabCopy">
+      <i class="fa-solid fa-copy"></i> UPI Copy
+    </button>
+  </div>
+
+  <!-- Scan Panel -->
+  <div class="pay-panel active" id="panelScan">
+    <div class="qr-box">
+      <div class="qr-wrap"><div id="qrCanvas"></div></div>
+      <div class="notes-row">
+        <div>
+          <div class="notes-lbl"><i class="fa-solid fa-circle-info" style="color:var(--saffron)"></i> UPI Note में लिखें</div>
+          <div class="notes-val" id="noteDisplay1">—</div>
+        </div>
+        <button class="btn-copy-sm" id="noteCopyBtn1" onclick="copyNote('noteCopyBtn1')">
+          <i class="fa-regular fa-copy"></i> कॉपी
+        </button>
+      </div>
+    </div>
+    <div class="panel-footer">
+      <button class="btn-green" onclick="goToScreen(4)">
+        <i class="fa-solid fa-check-circle"></i> मैंने भुगतान कर दिया
+      </button>
+    </div>
+  </div>
+
+  <!-- UPI Copy Panel -->
+  <div class="pay-panel" id="panelCopy">
+    <div class="upi-panel">
+      <p style="font-size:.88rem;color:var(--maroon);font-weight:700;margin-bottom:10px;">
+        <i class="fa-solid fa-at" style="color:var(--saffron)"></i> UPI ID से भुगतान करें
+      </p>
+      <div class="upi-row">
+        <div class="upi-id" id="upiIdDisplay">—</div>
+        <button class="btn-copy-upi" id="copyUpiBtn" onclick="copyUpiId()">
+          <i class="fa-regular fa-copy"></i> कॉपी
+        </button>
+      </div>
+      <div class="notes-row" style="margin-bottom:12px;">
+        <div>
+          <div class="notes-lbl"><i class="fa-solid fa-circle-info" style="color:var(--saffron)"></i> UPI Note में लिखें</div>
+          <div class="notes-val" id="noteDisplay2">—</div>
+        </div>
+        <button class="btn-copy-sm" id="noteCopyBtn2" onclick="copyNote('noteCopyBtn2')">
+          <i class="fa-regular fa-copy"></i> कॉपी
+        </button>
+      </div>
+      <ul class="steps">
+        <li><span class="step-n">1</span>ऊपर UPI ID कॉपी करें</li>
+        <li><span class="step-n">2</span>UPI App खोलें (PhonePe / GPay / Paytm)</li>
+        <li><span class="step-n">3</span>Send Money / Pay पर जाएँ</li>
+        <li><span class="step-n">4</span>UPI ID पेस्ट करें और राशि डालें</li>
+        <li><span class="step-n">5</span>Note में ऊपर का code लिखें</li>
+      </ul>
+      <button class="btn-green" onclick="goToScreen(4)">
+        <i class="fa-solid fa-check-circle"></i> मैंने भुगतान कर दिया
+      </button>
+    </div>
+  </div>
+  <div class="spacer"></div>
+</div><!-- /screen3 -->
+
+
+<!-- ============================================================
+     SCREEN 4 · UTR ENTRY
+     ============================================================ -->
+<div class="screen" id="screen4">
+  <div class="page-header">
+    <button class="back-ico" onclick="goToScreen(3)"><i class="fa-solid fa-arrow-left"></i></button>
+    <div class="page-header-text">
+      <h2>भुगतान की पुष्टि</h2>
+      <p>UTR नंबर दर्ज करें</p>
+    </div>
+  </div>
+
+  <div class="utr-card">
+    <div class="utr-icon-wrap"><i class="fa-solid fa-receipt"></i></div>
+    <div class="utr-title">UTR नंबर दर्ज करें</div>
+    <div class="utr-sub">
+      UPI भुगतान के बाद SMS / App में मिला<br>
+      12 अंकों का UTR / Reference नंबर दर्ज करें
+    </div>
+    <input type="text" class="utr-input" id="utrInput" placeholder="UTR / Reference Number" maxlength="20">
+    <div class="form-group" style="margin-bottom:16px;">
+      <label style="font-size:.84rem;color:var(--maroon);font-weight:700;display:flex;align-items:center;gap:6px;margin-bottom:7px;">
+        <i class="fa-solid fa-indian-rupee-sign" style="color:var(--saffron)"></i> भुगतान राशि
+      </label>
+      <input type="number" class="form-control" id="utrAmount" placeholder="₹ भुगतान की राशि" min="1">
+    </div>
+    <button class="btn-primary" onclick="verifyPayment()" style="margin-top:0;">
+      <i class="fa-solid fa-shield-check"></i> भुगतान की पुष्टि करें
+    </button>
+  </div>
+</div><!-- /screen4 -->
+
+
+<!-- ============================================================
+     SCREEN 5 · SUCCESS + SHARE
+     ============================================================ -->
+<div class="screen" id="screen5">
+  <div style="background:linear-gradient(135deg,var(--maroon),var(--maroon-dk));padding:16px 20px;text-align:center;">
+    <span style="color:var(--gold-lt);font-size:1.05rem;font-weight:700;">🙏 धन्यवाद — जय श्री राम!</span>
+  </div>
+
+  <div class="success-card">
+    <div class="success-anim"><i class="fa-solid fa-check"></i></div>
+    <div class="success-title">जय श्री राम! 🙏</div>
+    <div class="pid-badge" id="successPid">भुगतान ID: RC100001</div>
+    <div class="success-msg">
+      आपका दान सफलतापूर्वक दर्ज हो गया है।<br>
+      मंदिर निर्माण में आपका सहयोग अत्यंत सराहनीय है।<br>
+      भगवान राम आपको सदा आशीर्वाद दें। 🌸
+    </div>
+  </div>
+
+  <div class="share-btns">
+    <button class="btn-share btn-share-ref" onclick="shareReferral()">
+      <i class="fa-solid fa-share-nodes"></i>
+      दान लिंक शेयर करें (रेफरल के साथ)
+    </button>
+    <a class="btn-share btn-share-wa" id="waBtn5" href="#" target="_blank">
+      <i class="fa-brands fa-whatsapp"></i>
+      WhatsApp ग्रुप से जुड़ें
+    </a>
+    <button class="btn-share btn-share-new" onclick="startNewDonation()">
+      <i class="fa-solid fa-rotate-left"></i>
+      नया दान करें
+    </button>
+  </div>
+</div><!-- /screen5 -->
+
+
+<!-- QR Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+/* ================================================================
+   CONFIG — UPDATE THESE VALUES
+   ================================================================ */
+const CONFIG = {
+  UPI_ID:          '9955623872@okbizaxis',       // ← your UPI ID
+  UPI_NAME:        'Ganpati Cement Bhandar',      // ← UPI display name
+  WHATSAPP_GROUP:  'https://chat.whatsapp.com/Jx4ljFc9L2MECi278ALx5Y', // ← WA link
+  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzUredwdXlymOkfFzMq5IuqH1J_OePM_m-DpHEoH3K2UJLbSW-vo_QI-JKlXtszn3FDVA/exec', // ← Apps Script URL
+  YOUTUBE_VIDEO:   'YOUR_VIDEO_ID',               // ← YouTube video ID only
+  BASE_URL:        window.location.origin + window.location.pathname,
+};
+
+/* ================================================================
+   STATE
+   ================================================================ */
+const S = {
+  sessionId:              Math.random().toString(36).substr(2,8).toUpperCase(),
+  paymentId:              null,
+  referredBy:             null,
+  name:'', phone:'', address:'', amount:0,
+  upiNote:                '',
+  pageStart:              Date.now(),
+  payScreenStart:         null,
+  payScreenSecs:          0,
+  timerInterval:          null,
+  timerSecs:              300,
+  stay30Fired:            false,
+};
+
+/* ================================================================
+   INIT
+   ================================================================ */
+document.addEventListener('DOMContentLoaded', () => {
+  const p = new URLSearchParams(window.location.search);
+
+  // Pre-fill from URL params: ?n=name&no=phone&add=address&am=amount&ref=code
+  if (p.get('n'))   { document.getElementById('donorName').value    = p.get('n');   S.name    = p.get('n'); }
+  if (p.get('no'))  { document.getElementById('donorPhone').value   = p.get('no');  S.phone   = p.get('no'); }
+  if (p.get('add')) { document.getElementById('donorAddress').value = p.get('add'); S.address = p.get('add'); }
+  if (p.get('am'))  {
+    const a = parseInt(p.get('am'));
+    if (a > 0) { S.amount = a; document.getElementById('donorAmount').value = a; highlightChip(a); }
+  }
+  if (p.get('ref')) S.referredBy = p.get('ref');
+
+  // Update YouTube src if ID is set
+  if (CONFIG.YOUTUBE_VIDEO && CONFIG.YOUTUBE_VIDEO !== 'YOUR_VIDEO_ID') {
+    document.getElementById('yt-frame').src =
+      'https://www.youtube.com/embed/' + CONFIG.YOUTUBE_VIDEO + '?rel=0&playsinline=1';
+  }
+
+  // Set all WhatsApp links
+  ['navWaBtn','groupBanner','waBtn5'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.href = CONFIG.WHATSAPP_GROUP;
+  });
+
+  document.getElementById('upiIdDisplay').textContent = CONFIG.UPI_ID;
+
+  // Track visit
+  fire({ action:'visit', sessionId:S.sessionId, referredBy:S.referredBy||'', ts:ts() });
+
+  // 30-second stay tracker
+  setTimeout(() => {
+    if (!S.stay30Fired) {
+      S.stay30Fired = true;
+      fire({ action:'event', event:'stay_30sec', sessionId:S.sessionId, timeSpent:30, ts:ts() });
+    }
+  }, 30000);
+
+  // Page exit
+  window.addEventListener('beforeunload', () => {
+    fire({ action:'event', event:'page_exit', sessionId:S.sessionId, timeSpent:elapsed(), ts:ts() });
+  });
+});
+
+const ts      = () => new Date().toISOString();
+const elapsed = () => Math.round((Date.now() - S.pageStart) / 1000);
+
+/* ================================================================
+   NAVIGATION
+   ================================================================ */
+function goToScreen(n) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen' + n).classList.add('active');
+  window.scrollTo(0, 0);
+  if (n === 3) { S.payScreenStart = Date.now(); startTimer(); generateQR(); }
+}
+
+// Back from payment screen to form — stops timer, preserves all form data
+function goBackToForm() {
+  clearInterval(S.timerInterval);
+  goToScreen(2);
+}
+
+/* ================================================================
+   SCREEN 1
+   ================================================================ */
+function onDaanClick() {
+  fire({ action:'event', event:'daan_click', sessionId:S.sessionId, timeSpent:elapsed(), ts:ts() });
+  goToScreen(2);
+}
+function trackEvent(evt) {
+  fire({ action:'event', event:evt, sessionId:S.sessionId, timeSpent:elapsed(), ts:ts() });
+}
+
+/* ================================================================
+   SCREEN 2 · FORM
+   ================================================================ */
+function selectChip(amt, el) {
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  S.amount = amt;
+  document.getElementById('donorAmount').value = amt; // reflect in input box
+}
+function onManualAmount() {
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  S.amount = parseInt(document.getElementById('donorAmount').value) || 0;
+}
+function highlightChip(amt) {
+  document.querySelectorAll('.chip').forEach(c => {
+    if (parseInt(c.textContent.replace('₹','')) === amt) c.classList.add('selected');
+  });
+}
+
+function proceedToPayment() {
+  const name  = document.getElementById('donorName').value.trim();
+  const phone = document.getElementById('donorPhone').value.trim();
+  const addr  = document.getElementById('donorAddress').value.trim();
+  const amt   = S.amount || parseInt(document.getElementById('donorAmount').value);
+
+  if (!name)                      { showToast('कृपया अपना नाम दर्ज करें'); return; }
+  if (!phone || phone.length!==10){ showToast('कृपया सही 10 अंकों का नंबर दर्ज करें'); return; }
+  if (!amt || amt < 1)            { showToast('कृपया दान राशि चुनें'); return; }
+
+  S.name=name; S.phone=phone; S.address=addr; S.amount=amt;
+
+  // Generate local payment ID (RC + 6 digits)
+  S.paymentId = 'RC' + (100000 + Math.floor(Math.random() * 899999));
+  S.upiNote   = S.paymentId + '-' + phone;  // Format: RC123456-9801907094
+
+  // Update payment screen UI
+  document.getElementById('displayAmount').textContent    = amt.toLocaleString('hi-IN');
+  document.getElementById('displayPaymentId').textContent = S.paymentId;
+  document.getElementById('noteDisplay1').textContent     = S.upiNote;
+  document.getElementById('noteDisplay2').textContent     = S.upiNote;
+  document.getElementById('utrAmount').value              = amt;
+
+  goToScreen(3);
+
+  // Register in sheet (fire and forget)
+  fire({
+    action:'register', sessionId:S.sessionId, paymentId:S.paymentId,
+    referredBy:S.referredBy||'', name, phone, address:addr,
+    amount:amt, timeSpent:elapsed(), ts:ts(),
+  });
+}
+
+/* ================================================================
+   SCREEN 3 · PAYMENT
+   ================================================================ */
+function startTimer() {
+  S.timerSecs = 300;
+  clearInterval(S.timerInterval);
+  updateTimer();
+  S.timerInterval = setInterval(() => {
+    S.timerSecs--;
+    updateTimer();
+    if (S.timerSecs <= 0) clearInterval(S.timerInterval);
+  }, 1000);
+}
+function restartTimer() {
+  clearInterval(S.timerInterval);
+  S.timerSecs = 300;
+  startTimer();
+  generateQR();
+  showToast('QR नया हो गया ✓');
+}
+function updateTimer() {
+  const m  = Math.floor(S.timerSecs/60).toString().padStart(2,'0');
+  const s  = (S.timerSecs%60).toString().padStart(2,'0');
+  const el = document.getElementById('timerDisplay');
+  if (el) { el.textContent = m+':'+s; el.classList.toggle('urgent', S.timerSecs<=60); }
+}
+
+function generateQR() {
+  const note = encodeURIComponent(S.upiNote);
+  const url  = `upi://pay?pa=${CONFIG.UPI_ID}&pn=${encodeURIComponent(CONFIG.UPI_NAME)}&am=${S.amount}&tn=${note}&cu=INR`;
+  const wrap = document.getElementById('qrCanvas');
+  wrap.innerHTML = '';
+  if (typeof QRCode !== 'undefined') {
+    new QRCode(wrap, { text:url, width:200, height:200, colorDark:'#5C0F0F', colorLight:'#FFFFFF', correctLevel:QRCode.CorrectLevel.M });
+  }
+}
+
+function switchTab(tab) {
+  document.getElementById('tabScan').classList.toggle('active', tab==='scan');
+  document.getElementById('tabCopy').classList.toggle('active', tab==='copy');
+  document.getElementById('panelScan').classList.toggle('active', tab==='scan');
+  document.getElementById('panelCopy').classList.toggle('active', tab==='copy');
+}
+
+function copyNote(btnId) {
+  navigator.clipboard.writeText(S.upiNote).then(() => {
+    const b = document.getElementById(btnId);
+    b.classList.add('copied'); b.innerHTML='✓ कॉपी';
+    showToast('Note कॉपी हो गया!');
+    setTimeout(() => { b.innerHTML='<i class="fa-regular fa-copy"></i> कॉपी'; b.classList.remove('copied'); }, 3000);
+  }).catch(() => showToast('मैन्युअली कॉपी करें: '+S.upiNote));
+}
+
+function copyUpiId() {
+  navigator.clipboard.writeText(CONFIG.UPI_ID).then(() => {
+    const b = document.getElementById('copyUpiBtn');
+    b.textContent='✓ कॉपी हुआ'; b.classList.add('copied');
+    showToast('UPI ID कॉपी हो गया!');
+    setTimeout(() => { b.innerHTML='<i class="fa-regular fa-copy"></i> कॉपी'; b.classList.remove('copied'); }, 3000);
+  }).catch(() => showToast('मैन्युअली: '+CONFIG.UPI_ID));
+}
+
+/* ================================================================
+   SCREEN 4 · UTR VERIFY
+   ================================================================ */
+function verifyPayment() {
+  const utr = document.getElementById('utrInput').value.trim();
+  const amt = parseInt(document.getElementById('utrAmount').value);
+
+  if (!utr || utr.length < 6) { showToast('कृपया सही UTR नंबर दर्ज करें'); return; }
+  if (!amt || amt < 1)         { showToast('कृपया राशि दर्ज करें'); return; }
+
+  if (S.payScreenStart) S.payScreenSecs = Math.round((Date.now()-S.payScreenStart)/1000);
+
+  fire({
+    action:'payment', sessionId:S.sessionId, paymentId:S.paymentId,
+    name:S.name, phone:S.phone, address:S.address,
+    amountRegistered:S.amount, amountConfirmed:amt,
+    referredBy:S.referredBy||'', utr,
+    status:'UTR_SUBMITTED',
+    payScreenSecs:S.payScreenSecs, timeSpent:elapsed(), ts:ts(),
+  });
+
+  document.getElementById('successPid').textContent = 'भुगतान ID: ' + S.paymentId;
+  goToScreen(5);
+}
+
+/* ================================================================
+   SCREEN 5 · SHARE
+   ================================================================ */
+function shareReferral() {
+  // Referral link uses paymentId as the ref code
+  const url  = CONFIG.BASE_URL + '?ref=' + S.paymentId;
+  const text = `🙏 जय श्री राम!\n\nमैंने रामचौरा मंदिर निर्माण में ₹${S.amount.toLocaleString('hi-IN')} का सहयोग दिया।\n\nआप भी इस पुण्य कार्य में सहयोग दें 👇\n${url}\n\n🚩 रामचौरा मंदिर, हाजीपुर, वैशाली, बिहार`;
+  if (navigator.share) {
+    navigator.share({ title:'रामचौरा मंदिर दान', text, url }).catch(() => copyText(text));
+  } else {
+    copyText(text);
+    showToast('लिंक कॉपी हो गया! शेयर करें 🚩');
+  }
+}
+
+function startNewDonation() {
+  // Clear amount/payment state but keep name/phone/address in form
+  S.amount=0; S.paymentId=null;
+  document.getElementById('donorAmount').value='';
+  document.getElementById('utrInput').value='';
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('selected'));
+  goToScreen(2);
+}
+
+function copyText(t) { navigator.clipboard.writeText(t).catch(()=>{}); }
+
+/* ================================================================
+   FIRE AND FORGET — sends 3x with stagger for reliability
+   ================================================================ */
+function fire(data) {
+  if (!CONFIG.APPS_SCRIPT_URL || CONFIG.APPS_SCRIPT_URL.includes('YOUR')) return;
+  [0, 900, 2200].forEach(delay => {
+    setTimeout(() => {
+      fetch(CONFIG.APPS_SCRIPT_URL, {
+        method:'POST', mode:'no-cors',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(data),
+      }).catch(()=>{});
+    }, delay);
+  });
+}
+
+/* ================================================================
+   TOAST
+   ================================================================ */
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3200);
+}
+</script>
+</body>
+</html>
