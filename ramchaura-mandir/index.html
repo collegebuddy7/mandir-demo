@@ -777,8 +777,6 @@ textarea.form-control { resize:vertical; min-height:80px; }
           </button>
         </div>
 
-        <!-- <a class="btn-upi-direct" href="upi://pay?pa=9955623872@okbizaxis&pn=Ganpati%20Cement%20Bhandar" id="upiDirectBtn"> -->
-</a>
 
         <ul class="steps">
           <li><span class="step-n">1</span>ऊपर UPI ID कॉपी करें</li>
@@ -1163,7 +1161,7 @@ function copyUpiId() {
     const b = document.getElementById('copyUpiBtn');
     b.textContent='✓ कॉपी हुआ'; b.classList.add('copied');
     showToast('UPI ID कॉपी हो गया!');
-    setTimeout(() => { b.innerHTML='<i class="fa-regular fa-copy"></i> UPI ID कॉपी करें'; b.classList.remove('copied'); }, 3000);
+    setTimeout(() => { b.innerHTML='<i class="fa-regular fa-copy"></i>कॉपी करें'; b.classList.remove('copied'); }, 3000);
   }).catch(() => showToast('मैन्युअली: '+CONFIG.UPI_ID));
 }
 
