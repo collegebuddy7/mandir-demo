@@ -306,7 +306,28 @@ textarea.form-control { resize:vertical; min-height:80px; }
 .qr-box { background:white; margin:0 16px 12px; border-radius:var(--radius); padding:20px; text-align:center; box-shadow:var(--shadow); }
 .qr-wrap { display:inline-block; padding:10px; background:white; border:3px solid var(--gold); border-radius:12px; box-shadow:0 4px 14px rgba(212,160,23,0.16); margin-bottom:14px; }
 #qrCanvas { display:block; }
-
+.btn-upi-direct {
+  width: 100%;
+  background: linear-gradient(135deg, #6F42C1, #5A2D82);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-family: var(--font-hi);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 13px rgba(111, 66, 193, 0.32);
+  transition: transform 0.15s;
+  margin: 12px 0;
+}
+.btn-upi-direct:active {
+  transform: scale(0.98);
+}
 /* UPI Panel */
 .upi-panel { background:white; margin:0 16px 12px; border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); }
 .upi-info-card { background:linear-gradient(135deg,var(--saffron-pale),#FFF8F0); border:2px solid var(--gold); border-radius:12px; padding:14px 16px; margin-bottom:14px; }
@@ -726,6 +747,10 @@ textarea.form-control { resize:vertical; min-height:80px; }
       </div>
     </div>
 
+<button class="btn-upi-direct" onclick="openUpiApp()">
+  <i class="fa-brands fa-android"></i> UPI ऐप से भुगतान करें
+</button>
+
     <!-- UPI Copy Panel -->
     <div class="pay-panel" id="panelCopy">
       <div class="upi-panel">
@@ -741,7 +766,7 @@ textarea.form-control { resize:vertical; min-height:80px; }
           </div>
           <div class="upi-info-row">
             <span class="upi-info-label">💰 राशि</span>
-            <span class="upi-amount-val">₹<span id="upiAmountDisplay">—</span></span>
+            <span class="upi-amount-val">₹<span id="upiAmountDisplay">9955623872@okbizaxis</span></span>
           </div>
         </div>
 
@@ -1212,6 +1237,12 @@ function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent=msg; t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'), 3200);
+}
+
+function openUpiApp() {
+  const note = encodeURIComponent(S.upiNote);
+  const url = `upi://pay?pa=${CONFIG.UPI_ID}&pn=${encodeURIComponent(CONFIG.UPI_NAME)}&tn=${note}&cu=INR`;
+  window.location.href = url;
 }
 </script>
 </body>
