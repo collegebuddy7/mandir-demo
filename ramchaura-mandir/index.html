@@ -197,6 +197,7 @@ body {
 .person-name { font-size:.9rem; font-weight:700; color:var(--maroon); margin-bottom:3px; }
 .person-post { display:inline-block; background:var(--saffron-pale); color:var(--saffron); font-size:.68rem; font-weight:600; padding:2px 8px; border-radius:20px; margin-bottom:8px; font-family:var(--font-en); }
 .person-para { font-size:.77rem; color:var(--txt-md); line-height:1.6; }
+.person-post a {color: var(--saffron);}
 
 /* ===== STICKY SUPPORT FOOTER (ALL SCREENS) ===== */
 .sticky-support {
@@ -319,6 +320,29 @@ textarea.form-control { resize:vertical; min-height:80px; }
 .upi-id-text { font-size:.98rem; font-weight:700; color:var(--maroon); font-family:var(--font-en); }
 .btn-copy-upi { background:var(--saffron); color:white; border:none; padding:9px 14px; border-radius:9px; font-family:var(--font-hi); font-size:.82rem; cursor:pointer; display:flex; align-items:center; gap:5px; transition:background .2s; font-weight:700; }
 .btn-copy-upi.copied { background:var(--green); }
+
+.btn-upi-direct {
+  width: 100%;
+  background: linear-gradient(135deg, #6F42C1, #5A2D82);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-family: var(--font-hi);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 13px rgba(111, 66, 193, 0.32);
+  transition: transform 0.15s;
+  margin: 12px 0;
+}
+.btn-upi-direct:active {
+  transform: scale(0.98);
+}
 
 .steps { list-style:none; margin:10px 0 13px; }
 .steps li { display:flex; align-items:flex-start; gap:9px; padding:5px 0; font-size:.81rem; color:var(--txt-md); }
@@ -594,7 +618,7 @@ textarea.form-control { resize:vertical; min-height:80px; }
   <!-- Important People - CENTERED -->
   <div class="people-section">
     <div class="sec-title" style="padding-bottom:10px;">
-      <i class="fa-solid fa-users"></i> मंदिर निर्माण पूरा करने में महत्वपूर्ण योगदानकर्ता
+      <i class="fa-solid fa-users"></i> ईश्वरीय कार्य की पूर्णता के निम्मित एक अडिग प्रयास 
     </div>
     <div class="people-scroll">
       <div class="person-card">
@@ -602,8 +626,8 @@ textarea.form-control { resize:vertical; min-height:80px; }
              onerror="this.style.height='60px';this.style.background='var(--saffron-pale)';">
         <div class="person-body">
           <div class="person-name">राजीव ब्रह्मर्षि</div>
-          <span class="person-post">हिन्दू पुत्र - संस्थापक</span>
-          <p class="person-para">मंदिर का अधुरा निर्माण पूरा करने का संकल्प लिया है, जब तक प्लास्टर न हो जाए चप्पल न पहनने का प्रण लिया है |</p>
+          <span class="person-post"><a href="https://hinduputra.org" target="_blank"> हिन्दू पुत्र संगठन  </a>- संस्थापक</span>
+          <p class="person-para">मंदिर का अधुरा निर्माण पूरा करने के लिए | जब तक प्लास्टर न हो जाए, तब तक नंगे पाँव रहने का कठोर प्रण लिया है |</p>
         </div>
       </div>
     </div>
@@ -747,11 +771,15 @@ textarea.form-control { resize:vertical; min-height:80px; }
 
         <!-- UPI ID with copy -->
         <div class="upi-id-row">
-          <div class="upi-id-text" id="upiIdDisplay">—</div>
+          <div class="upi-id-text" id="upiIdDisplay">9955623872@okbizaxis</div>
           <button class="btn-copy-upi" id="copyUpiBtn" onclick="copyUpiId()">
             <i class="fa-regular fa-copy"></i>कॉपी करें
           </button>
         </div>
+
+        <a class="btn-upi-direct" href="upi://"">
+  <i class="fa-brands fa-android"></i> UPI ऐप से भुगतान करें
+</a>
 
         <ul class="steps">
           <li><span class="step-n">1</span>ऊपर UPI ID कॉपी करें</li>
