@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>मंदिर निर्माण अभियान — हिन्दू पुत्र संगठन</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;600;700&family=Poppins:wght@600;700&family=Rozha+One&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --saffron:   #FF6B00;
+  --maroon:    #8B1A1A;
+  --maroon-dk: #5C0F0F;
+  --gold:      #D4A017;
+  --gold-lt:   #F5C842;
+  --cream:     #F5E6C8;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:100%; height:100%; overflow-x:hidden; }
+
+body {
+  font-family: 'Hind', sans-serif;
+  background: var(--cream);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ===== BACKGROUND ===== */
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  background-image: url('bg-pattern.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+/* Soft warm vignette over background */
+.bg-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(245,200,66,0.08) 0%, transparent 65%),
+    linear-gradient(to bottom,
+      rgba(92,15,15,0.18) 0%,
+      rgba(0,0,0,0) 30%,
+      rgba(0,0,0,0) 60%,
+      rgba(92,15,15,0.22) 100%
+    );
+}
+
+/* ===== FALLING PETALS — z-index 1 (behind video) ===== */
+.petals-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: -60px;
+  font-size: 1.4rem;
+  opacity: 0;
+  animation: petalFall linear infinite;
+  will-change: transform, opacity;
+  user-select: none;
+}
+
+@keyframes petalFall {
+  0%   { transform: translateY(0) translateX(0) rotate(0deg);   opacity: 0; }
+  5%   { opacity: 0.7; }
+  85%  { opacity: 0.5; }
+  100% { transform: translateY(110vh) translateX(var(--drift)) rotate(var(--spin)); opacity: 0; }
+}
+
+/* 16 petals — varied positions, sizes, delays, durations */
+.petal:nth-child(1)  { left:3%;   font-size:1.1rem; --drift:30px;  --spin:200deg; animation-duration:7.2s;  animation-delay:0s;    }
+.petal:nth-child(2)  { left:12%;  font-size:1.5rem; --drift:-20px; --spin:300deg; animation-duration:8.8s;  animation-delay:1.1s;  }
+.petal:nth-child(3)  { left:22%;  font-size:0.9rem; --drift:40px;  --spin:180deg; animation-duration:6.5s;  animation-delay:2.3s;  }
+.petal:nth-child(4)  { left:34%;  font-size:1.3rem; --drift:-35px; --spin:260deg; animation-duration:9.1s;  animation-delay:0.5s;  }
+.petal:nth-child(5)  { left:44%;  font-size:1.0rem; --drift:25px;  --spin:320deg; animation-duration:7.8s;  animation-delay:3.2s;  }
+.petal:nth-child(6)  { left:55%;  font-size:1.6rem; --drift:-28px; --spin:140deg; animation-duration:8.3s;  animation-delay:0.8s;  }
+.petal:nth-child(7)  { left:65%;  font-size:1.1rem; --drift:50px;  --spin:400deg; animation-duration:6.9s;  animation-delay:1.7s;  }
+.petal:nth-child(8)  { left:76%;  font-size:0.95rem;--drift:-40px; --spin:220deg; animation-duration:9.5s;  animation-delay:2.8s;  }
+.petal:nth-child(9)  { left:86%;  font-size:1.4rem; --drift:20px;  --spin:280deg; animation-duration:7.4s;  animation-delay:0.3s;  }
+.petal:nth-child(10) { left:93%;  font-size:1.0rem; --drift:-15px; --spin:360deg; animation-duration:8.1s;  animation-delay:4.0s;  }
+.petal:nth-child(11) { left:7%;   font-size:1.2rem; --drift:38px;  --spin:190deg; animation-duration:10.2s; animation-delay:5.1s;  }
+.petal:nth-child(12) { left:18%;  font-size:0.85rem;--drift:-22px; --spin:310deg; animation-duration:7.6s;  animation-delay:3.6s;  }
+.petal:nth-child(13) { left:48%;  font-size:1.3rem; --drift:32px;  --spin:240deg; animation-duration:8.7s;  animation-delay:6.2s;  }
+.petal:nth-child(14) { left:60%;  font-size:1.0rem; --drift:-30px; --spin:170deg; animation-duration:9.8s;  animation-delay:1.4s;  }
+.petal:nth-child(15) { left:30%;  font-size:1.5rem; --drift:18px;  --spin:350deg; animation-duration:7.0s;  animation-delay:4.7s;  }
+.petal:nth-child(16) { left:72%;  font-size:0.9rem; --drift:-45px; --spin:290deg; animation-duration:11.0s; animation-delay:2.1s;  }
+
+/* ===== PAGE LAYOUT ===== */
+.page {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  padding: 0 16px 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* ===== TOP BRAND ROW ===== */
+.top-brand {
+  width: 100%;
+  max-width: 420px;
+  padding: 18px 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.top-om {
+  font-size: 1.5rem;
+  animation: omPulse 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba(212,160,23,0.5));
+}
+@keyframes omPulse { 50%{transform:scale(1.1);} }
+.top-org {
+  font-size: 0.72rem;
+  color: var(--maroon-dk);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+.top-flag { font-size:1.1rem; animation:flagWave 2s ease-in-out infinite; }
+@keyframes flagWave { 0%,100%{transform:rotate(-6deg)} 50%{transform:rotate(6deg)} }
+
+/* ===== TITLE SECTION ===== */
+.title-section {
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  padding: 4px 0 18px;
+  position: relative;
+}
+
+.title-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, var(--maroon), var(--maroon-dk));
+  color: var(--gold-lt);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 10px rgba(92,15,15,0.25);
+}
+
+.title-main {
+  font-family: 'Rozha One', serif;
+  font-size: 2.3rem;
+  line-height: 1.15;
+  color: var(--maroon-dk);
+  text-shadow:
+    1px 1px 0 rgba(255,255,255,0.6),
+    0 3px 18px rgba(92,15,15,0.18);
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.title-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 8px auto 10px;
+}
+.title-divider-line {
+  height: 1.5px;
+  width: 55px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.title-divider-diamond {
+  width: 8px; height: 8px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  box-shadow: 0 0 6px rgba(212,160,23,0.6);
+}
+
+.title-sub {
+  font-size: 0.92rem;
+  color: var(--maroon);
+  font-weight: 600;
+  opacity: 0.85;
+  line-height: 1.5;
+}
+.title-sub span {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--saffron), var(--maroon));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* ===== VIDEO CARD — z-index: 10 ===== */
+.video-card-wrap {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 340px;
+  /* Portrait 9:16 ratio */
+  aspect-ratio: 9 / 16;
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow:
+    0 24px 60px rgba(92,15,15,0.35),
+    0 0 0 3px rgba(212,160,23,0.55),
+    0 0 0 6px rgba(255,107,0,0.12),
+    inset 0 0 0 1px rgba(255,255,255,0.15);
+  background: #1a0505;
+}
+
+/* Gold shimmer border animation */
+.video-card-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 28px;
+  background: linear-gradient(
+    135deg,
+    var(--gold-lt), var(--saffron), var(--maroon), var(--gold), var(--saffron), var(--gold-lt)
+  );
+  background-size: 400% 400%;
+  animation: borderShimmer 4s ease infinite;
+  z-index: -1;
+}
+@keyframes borderShimmer {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+
+/* Video element */
+.card-video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 26px;
+}
+
+/* Top overlay branding */
+.card-top-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 20;
+  background: linear-gradient(to bottom, rgba(92,15,15,0.72) 0%, transparent 100%);
+  padding: 16px 16px 32px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.card-brand-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  padding: 5px 11px;
+  color: var(--gold-lt);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.card-live-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #FF4444;
+  animation: livePulse 1.2s ease-in-out infinite;
+}
+@keyframes livePulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(255,68,68,0.5); }
+  50%      { box-shadow: 0 0 0 4px rgba(255,68,68,0); }
+}
+
+/* Bottom overlay on video */
+.card-bottom-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 20;
+  background: linear-gradient(to top, rgba(92,15,15,0.85) 0%, transparent 100%);
+  padding: 40px 16px 20px;
+  text-align: center;
+}
+.card-bottom-title {
+  font-family: 'Rozha One', serif;
+  font-size: 1.1rem;
+  color: var(--gold-lt);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  margin-bottom: 3px;
+}
+.card-bottom-sub {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.7);
+}
+
+/* Placeholder when no video */
+.card-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #3D0A0A 0%, #7A1515 50%, #C44A00 100%);
+  z-index: 5;
+}
+.card-placeholder-om {
+  font-size: 5rem;
+  color: rgba(245,200,66,0.25);
+  line-height: 1;
+  margin-bottom: 12px;
+  animation: omPulse 3s ease-in-out infinite;
+}
+.card-placeholder-text {
+  font-family: 'Rozha One', serif;
+  font-size: 1.4rem;
+  color: var(--gold-lt);
+  margin-bottom: 6px;
+}
+.card-placeholder-sub {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.6);
+}
+
+/* ===== CUSTOM VIDEO CONTROLS ===== */
+.video-controls {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 30;
+  padding: 0 14px 14px;
+  background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);
+  transition: opacity 0.35s ease;
+}
+.video-controls.hidden { opacity: 0; pointer-events: none; }
+
+/* Progress bar */
+.progress-wrap {
+  position: relative;
+  height: 3px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 3px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold-lt), var(--saffron));
+  border-radius: 3px;
+  transition: width 0.1s linear;
+}
+
+/* Controls row */
+.controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.ctrl-btn {
+  background: rgba(255,255,255,0.14);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.ctrl-btn:active { transform: scale(0.9); background: rgba(255,255,255,0.25); }
+.ctrl-btn.play-main {
+  width: 46px; height: 46px;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, var(--saffron), var(--maroon));
+  border: none;
+  box-shadow: 0 4px 14px rgba(255,107,0,0.45);
+}
+.ctrl-btn.play-main:active { transform: scale(0.92); }
+
+.ctrl-time {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.75);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  flex: 1;
+  text-align: center;
+}
+
+/* Big center play overlay */
+.center-play-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.center-play-overlay.show {
+  pointer-events: auto;
+  cursor: pointer;
+}
+.center-play-btn {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255,107,0,0.92), rgba(139,26,26,0.92));
+  backdrop-filter: blur(4px);
+  border: 2px solid rgba(255,255,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+  font-size: 1.9rem;
+  box-shadow:
+    0 8px 28px rgba(255,107,0,0.5),
+    0 0 0 12px rgba(255,107,0,0.12);
+  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+.center-play-overlay.show .center-play-btn {
+  animation: centerBounce 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes centerBounce {
+  0%   { transform: scale(0.7); opacity:0; }
+  100% { transform: scale(1);   opacity:1; }
+}
+
+/* ===== BOTTOM STICKY BUTTON ===== */
+.sticky-btn-wrap {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 999;
+  padding: 12px 16px 16px;
+  background: linear-gradient(to top, rgba(245,230,200,0.98) 70%, transparent 100%);
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+.btn-abhiyan {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 420px;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, var(--saffron) 0%, var(--maroon-dk) 100%);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-family: 'Hind', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  box-shadow:
+    0 6px 24px rgba(255,107,0,0.42),
+    inset 0 1px 0 rgba(255,255,255,0.15);
+  transition: transform 0.15s, box-shadow 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-abhiyan::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  animation: btnSheen 3s ease-in-out infinite;
+}
+@keyframes btnSheen { to { left: 200%; } }
+.btn-abhiyan:active { transform: scale(0.98); box-shadow: 0 3px 12px rgba(255,107,0,0.35); }
+.btn-abhiyan .btn-icon { font-size:1.25rem; }
+.btn-abhiyan .btn-sub {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 400;
+  opacity: 0.8;
+  margin-top: 1px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-layer"></div>
+
+<!-- Falling petals — BEHIND video (z-index 1) -->
+<div class="petals-layer" id="petalsLayer">
+  <!-- lotus flowers & marigold emojis alternating -->
+  <div class="petal">🌸</div>
+  <div class="petal">🌺</div>
+  <div class="petal">🪷</div>
+  <div class="petal">🌼</div>
+  <div class="petal">🌸</div>
+  <div class="petal">🌺</div>
+  <div class="petal">🪷</div>
+  <div class="petal">🌸</div>
+  <div class="petal">🌼</div>
+  <div class="petal">🌺</div>
+  <div class="petal">🪷</div>
+  <div class="petal">🌸</div>
+  <div class="petal">🌺</div>
+  <div class="petal">🌼</div>
+  <div class="petal">🪷</div>
+  <div class="petal">🌸</div>
+</div>
+
+<!-- Main content — z-index 2 (above petals) -->
+<div class="page">
+
+  <!-- Title -->
+  <div class="title-section">
+    <h1 class="title-main"><br>मंदिर निर्माण अभियान</h1>
+    <div class="title-divider">
+      <div class="title-divider-line"></div>
+      <div class="title-divider-diamond"></div>
+      <div class="title-divider-line"></div>
+    </div>
+    <p class="title-sub">
+      <span>हिन्दू पुत्र संगठन</span> का आह्वान<br>
+      रामचौरा मंदिर · हाजीपुर · वैशाली
+    </p>
+  </div>
+
+  <!-- ===== VIDEO CARD — z-index 10 ===== -->
+  <div class="video-card-wrap" id="videoCard">
+
+    <!-- Animated border handled by ::before pseudo -->
+
+    <!-- Top overlay branding -->
+    <div class="card-top-overlay">
+      <div class="card-brand-pill">
+        <div class="card-live-dot"></div>
+        जय श्री राम
+      </div>
+      <div class="card-brand-pill" style="background:rgba(212,160,23,0.2);border-color:rgba(212,160,23,0.35);color:var(--gold-lt);">
+        🚩 अभियान
+      </div>
+    </div>
+
+    <!-- VIDEO — replace reel.mp4 with your file -->
+    <video
+      id="mainVideo"
+      class="card-video"
+      playsinline
+      preload="metadata"
+      poster=""
+    >
+      <source src="reel.mp4" type="video/mp4">
+    </video>
+
+    <!-- Placeholder (shown if video fails) -->
+    <div class="card-placeholder" id="cardPlaceholder">
+      <div class="card-placeholder-om">🕉️</div>
+      <div class="card-placeholder-text">रामचौरा मंदिर</div>
+      <div class="card-placeholder-sub">मंदिर निर्माण अभियान</div>
+    </div>
+
+    <!-- Center Play Overlay (shown when paused) -->
+    <div class="center-play-overlay show" id="centerOverlay" onclick="togglePlay()">
+      <div class="center-play-btn" id="centerIcon">
+        <span>▶</span>
+      </div>
+    </div>
+
+    <!-- Bottom overlay label -->
+    <div class="card-bottom-overlay" id="cardBottomOverlay">
+      <div class="card-bottom-title">हरिपुर · रामचौरा मंदिर</div>
+      <div class="card-bottom-sub">निर्माण अभियान में सहयोग करें</div>
+    </div>
+
+    <!-- Custom controls (shown over video) -->
+    <div class="video-controls" id="videoControls">
+      <div class="progress-wrap" id="progressWrap" onclick="seekVideo(event)">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="controls-row">
+        <!-- Mute -->
+        <button class="ctrl-btn" id="muteBtn" onclick="toggleMute()" title="Mute/Unmute">
+          🔊
+        </button>
+        <!-- Play/Pause main -->
+        <button class="ctrl-btn play-main" id="playBtn" onclick="togglePlay()" title="Play/Pause">
+          ▶
+        </button>
+        <!-- Time display -->
+        <div class="ctrl-time" id="timeDisplay">0:00 / 0:00</div>
+        <!-- Fullscreen -->
+        <button class="ctrl-btn" onclick="toggleFullscreen()" title="Fullscreen">
+          ⛶
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /video-card-wrap -->
+
+</div><!-- /page -->
+
+<!-- ===== STICKY BOTTOM BUTTON ===== -->
+<div class="sticky-btn-wrap">
+  <a href="/ramchaura-mandir" class="btn-abhiyan" id="mainCta">
+
+    <span>
+      ​आइए, श्रद्धा और सहयोग का हाथ आगे बढ़ाएं। ⏭️⏭
+
+      <span class="btn-sub">जहाँ पधारे प्रभु श्री राम, उस पावन धाम को सजाएं।</span>
+    </span>
+  </a>
+</div>
+
+<script>
+/* ================================================================
+   VIDEO CONTROLLER
+   ================================================================ */
+const video        = document.getElementById('mainVideo');
+const placeholder  = document.getElementById('cardPlaceholder');
+const centerOverlay= document.getElementById('centerOverlay');
+const centerIcon   = document.getElementById('centerIcon');
+const playBtn      = document.getElementById('playBtn');
+const muteBtn      = document.getElementById('muteBtn');
+const progressFill = document.getElementById('progressFill');
+const timeDisplay  = document.getElementById('timeDisplay');
+const videoControls= document.getElementById('videoControls');
+const bottomOverlay= document.getElementById('cardBottomOverlay');
+
+let controlsTimeout = null;
+let isPlaying = false;
+
+/* --- Format seconds to M:SS --- */
+function fmtTime(s) {
+  if (!isFinite(s)) return '0:00';
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60).toString().padStart(2,'0');
+  return m + ':' + sec;
+}
+
+/* --- Show / hide bottom controls overlay --- */
+function showControls() {
+  videoControls.classList.remove('hidden');
+  bottomOverlay.style.opacity = '0';
+  clearTimeout(controlsTimeout);
+  if (isPlaying) {
+    controlsTimeout = setTimeout(hideControls, 3000);
+  }
+}
+function hideControls() {
+  videoControls.classList.add('hidden');
+  bottomOverlay.style.opacity = '1';
+}
+
+/* --- Toggle play / pause --- */
+function togglePlay() {
+  if (video.paused) {
+    video.muted = false;
+    video.play().catch(() => { video.muted = true; video.play(); });
+  } else {
+    video.pause();
+  }
+  showControls();
+}
+
+/* --- Mute toggle --- */
+function toggleMute() {
+  video.muted = !video.muted;
+  muteBtn.textContent = video.muted ? '🔇' : '🔊';
+}
+
+/* --- Seek on progress bar click --- */
+function seekVideo(e) {
+  const rect = document.getElementById('progressWrap').getBoundingClientRect();
+  const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+  video.currentTime = ratio * video.duration;
+  showControls();
+}
+
+/* --- Fullscreen --- */
+function toggleFullscreen() {
+  const card = document.getElementById('videoCard');
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  } else {
+    card.requestFullscreen && card.requestFullscreen();
+  }
+}
+
+/* --- Update state on play --- */
+video.addEventListener('play', () => {
+  isPlaying = true;
+  playBtn.textContent = '⏸';
+  centerIcon.innerHTML = '<span>⏸</span>';
+  // Hide center overlay when playing
+  setTimeout(() => {
+    centerOverlay.classList.remove('show');
+    centerOverlay.style.opacity = '0';
+  }, 200);
+  showControls();
+});
+
+/* --- Update state on pause --- */
+video.addEventListener('pause', () => {
+  isPlaying = false;
+  playBtn.textContent = '▶';
+  centerIcon.innerHTML = '<span>▶</span>';
+  centerOverlay.classList.add('show');
+  centerOverlay.style.opacity = '1';
+  clearTimeout(controlsTimeout);
+  videoControls.classList.remove('hidden');
+  bottomOverlay.style.opacity = '0';
+});
+
+/* --- Time update --- */
+video.addEventListener('timeupdate', () => {
+  if (video.duration) {
+    const pct = (video.currentTime / video.duration) * 100;
+    progressFill.style.width = pct + '%';
+    timeDisplay.textContent = fmtTime(video.currentTime) + ' / ' + fmtTime(video.duration);
+  }
+});
+
+/* --- Video error: show placeholder --- */
+video.addEventListener('error', () => {
+  video.style.display = 'none';
+  placeholder.style.display = 'flex';
+  centerOverlay.style.display = 'none';
+  videoControls.style.display = 'none';
+});
+
+/* --- Video loaded: hide placeholder --- */
+video.addEventListener('canplay', () => {
+  placeholder.style.display = 'none';
+  video.style.display = 'block';
+});
+
+/* --- Tap video area to show controls --- */
+document.getElementById('videoCard').addEventListener('click', (e) => {
+  if (e.target === video || e.target.classList.contains('video-card-wrap')) {
+    if (isPlaying) {
+      showControls();
+    }
+  }
+});
+
+/* --- Keyboard spacebar --- */
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space' && document.activeElement === document.body) {
+    e.preventDefault();
+    togglePlay();
+  }
+});
+
+/* --- Initial state: show controls --- */
+videoControls.classList.remove('hidden');
+bottomOverlay.style.opacity = '0';
+
+/* ================================================================
+   BUTTON SMOOTH TRANSITION
+   ================================================================ */
+document.getElementById('mainCta').addEventListener('click', function(e) {
+  document.body.style.transition = 'opacity 0.25s ease';
+  document.body.style.opacity = '0.9';
+  // Actual navigation happens via href
+});
+</script>
+
+</body>
+</html>

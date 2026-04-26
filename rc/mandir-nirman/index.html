@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>रामचौरा मंदिर — दान पृष्ठ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+  --saffron:      #FF6B00;
+  --saffron-lt:   #FF8C33;
+  --saffron-pale: #FFF3E8;
+  --gold:         #D4A017;
+  --gold-lt:      #F5C842;
+  --maroon:       #8B1A1A;
+  --maroon-dk:    #5C0F0F;
+  --cream:        #FDF6EC;
+  --white:        #FFFFFF;
+  --txt-dk:       #2C1810;
+  --txt-md:       #5C3D2E;
+  --txt-lt:       #9B7B6A;
+  --green:        #2D7D46;
+  --shadow:       0 4px 20px rgba(139,26,26,0.10);
+  --shadow-lg:    0 8px 36px rgba(139,26,26,0.16);
+  --radius:       16px;
+  --font-hi:      'Hind', sans-serif;
+  --font-en:      'Poppins', sans-serif;
+  --font-display: 'Playfair Display', serif;
+}
+*  { margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body {
+  font-family: var(--font-hi);
+  background: var(--cream);
+  color: var(--txt-dk);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.navbar {
+  position: fixed; top:0; left:0; right:0; z-index:1000;
+  height: 56px;
+  background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dk) 100%);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 12px;
+  box-shadow: 0 2px 18px rgba(0,0,0,0.28);
+  gap: 8px;
+}
+.navbar-brand {
+  display:flex; align-items:center; gap:7px;
+  color: var(--gold-lt); font-size:.92rem; font-weight:700; flex:1; min-width:0;
+}
+.navbar-brand i { color: var(--saffron-lt); font-size:1.05rem; flex-shrink:0; }
+.navbar-actions { display:flex; align-items:center; gap:7px; flex-shrink:0; }
+.btn-nav-help {
+  display:flex; align-items:center; gap:5px;
+  background: rgba(255,255,255,0.15); border:1.5px solid rgba(255,255,255,0.3);
+  color:white; padding:6px 11px; border-radius:20px;
+  font-family:var(--font-hi); font-size:.77rem; font-weight:600;
+  cursor:pointer; text-decoration:none; transition:background .2s;
+}
+.btn-nav-help i { color:#FFC107; }
+.btn-nav-help:hover { background: rgba(255,255,255,0.22); }
+.btn-nav-wa {
+  display:flex; align-items:center; gap:5px;
+  background: linear-gradient(135deg,#25D366,#128C7E);
+  color:white; border:none; padding:6px 11px; border-radius:20px;
+  font-family:var(--font-hi); font-size:.77rem; font-weight:600;
+  cursor:pointer; text-decoration:none;
+  box-shadow:0 2px 8px rgba(37,211,102,0.32); transition:transform .18s;
+}
+.btn-nav-wa:active { transform:scale(0.97); }
+
+.screen { display:none; min-height:100vh; padding-top:56px; }
+.screen.active { display:block; }
+
+#screen1 { padding-bottom:88px; }
+
+.parichay-card {
+  margin:14px 16px 0; border-radius:var(--radius);
+  overflow:hidden; box-shadow:var(--shadow-lg); background:white;
+  width: auto;
+  max-width: none;
+}
+.parichay-img { width:100%; height:100%; object-fit:cover; display:block; }
+.parichay-body {
+  padding:16px 18px 18px; border-left:4px solid var(--saffron);
+}
+.parichay-body h3 {
+  color:var(--maroon); font-size:1rem; font-weight:700;
+  margin-bottom:8px; display:flex; align-items:center; gap:7px;
+}
+.parichay-body h3 i { color:var(--saffron); }
+.parichay-body p { color:var(--txt-md); font-size:.87rem; line-height:1.8; }
+
+.sec-title {
+  text-align:center; font-size:1.05rem; color:var(--maroon);
+  padding:20px 20px 8px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.sec-title i { color:var(--saffron); }
+
+.flip-hint { text-align:center; color:var(--txt-lt); font-size:.75rem; padding:2px 0 10px; display:flex; align-items:center; justify-content:center; gap:4px; }
+.flip-grid { display:grid; grid-template-columns:1fr 1fr; gap:13px; padding:0 16px 4px; }
+.flip-card { perspective:1000px; height:195px; cursor:pointer; }
+.flip-inner { position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .65s cubic-bezier(.4,0,.2,1); border-radius:var(--radius); }
+.flip-card.flipped .flip-inner { transform:rotateY(180deg); }
+.flip-front,.flip-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:var(--radius); overflow:hidden; }
+.flip-front { background:#1a0a0a; }
+.flip-front img { width:100%; height:100%; object-fit:cover; opacity:.82; }
+.flip-front-lbl { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top,rgba(0,0,0,.78),transparent); padding:22px 10px 10px; color:white; font-size:.7rem; text-align:center; }
+.flip-back { transform:rotateY(180deg); background:linear-gradient(135deg,var(--saffron-pale),var(--cream)); border:2px solid var(--gold); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:13px; text-align:center; }
+.flip-back img { width:100%; height:126px; object-fit:cover; border-radius:10px; margin-bottom:8px; }
+.flip-back-txt { font-size:.7rem; color:var(--maroon); font-weight:700; line-height:1.4; }
+
+.needs-card { background:white; margin:14px 16px 0; border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); }
+.needs-head { font-size:.94rem; color:var(--maroon); font-weight:700; margin-bottom:12px; display:flex; align-items:center; gap:6px; }
+.needs-list { list-style:none; }
+.needs-list li { display:flex; align-items:center; gap:10px; padding:7px 0; border-bottom:1px solid var(--saffron-pale); font-size:.84rem; color:var(--txt-md); }
+.needs-list li:last-child { border-bottom:none; }
+.needs-list li i { color:var(--saffron); width:18px; text-align:center; }
+.badge { margin-left:auto; font-size:.69rem; font-weight:700; padding:3px 8px; border-radius:20px; font-family:var(--font-en); }
+.badge.pending { background:#FFF3CD; color:#856404; }
+.badge.progress { background:#D1ECF1; color:#0C5460; }
+
+.people-section {
+  text-align: center;
+  padding: 0 16px;
+}
+.people-scroll { 
+  display:flex; gap:14px; justify-content:center; flex-wrap:wrap;
+  padding: 10px 0 20px 0;
+}
+.person-card { 
+  flex:0 0 auto; width: 100%; max-width: 100%;
+  background:white; border-radius:var(--radius); 
+  overflow:hidden; box-shadow:var(--shadow); border-top:3px solid var(--gold); 
+}
+.person-card img { width:100%; height:auto; object-fit:cover; object-position:top; display:block; max-height: 320px; }
+.person-body { padding:11px 13px 14px; }
+.person-name { font-size:.9rem; font-weight:700; color:var(--maroon); margin-bottom:3px; }
+.person-post { display:inline-block; background:var(--saffron-pale); color:var(--saffron); font-size:.68rem; font-weight:600; padding:2px 8px; border-radius:20px; margin-bottom:8px; font-family:var(--font-en); }
+.person-post a {color: var(--saffron);}
+.person-para { font-size:.77rem; color:var(--txt-md); line-height:1.6; }
+
+.sticky-support {
+  position:fixed; bottom:0; left:0; right:0; 
+  padding:10px 12px; 
+  background:rgba(253,246,236,0.97); backdrop-filter:blur(12px);
+  box-shadow:0 -4px 18px rgba(139,26,26,0.12); 
+  z-index:999;
+  display:flex; gap:9px;
+}
+
+.btn-support-sticky {
+  flex:1; display:flex; align-items:center; justify-content:center; gap:7px;
+  background:linear-gradient(135deg,#FF8C00,#FF6B00); color:white; 
+  border:none; padding:13px 10px; border-radius:12px;
+  font-family:var(--font-hi); font-size:.88rem; font-weight:700; 
+  cursor:pointer; text-decoration:none;
+  box-shadow:0 3px 12px rgba(255,107,0,0.3);
+  transition: transform 0.15s;
+}
+.btn-support-sticky:active { transform:scale(0.98); }
+
+.btn-payment-sticky {
+  flex:1; display:flex; align-items:center; justify-content:center; gap:7px;
+  background:linear-gradient(135deg,var(--green),#1a5c32); color:white; 
+  border:none; padding:13px 10px; border-radius:12px;
+  font-family:var(--font-hi); font-size:.88rem; font-weight:700; 
+  cursor:pointer; text-decoration:none;
+  box-shadow:0 3px 12px rgba(45,125,70,0.3);
+  transition: transform 0.15s;
+}
+.btn-payment-sticky:active { transform:scale(0.98); }
+
+.sticky-donate { 
+  position:fixed; bottom:0; left:0; right:0; padding:11px 16px; 
+  background:rgba(253,246,236,0.96); backdrop-filter:blur(12px); 
+  box-shadow:0 -4px 18px rgba(139,26,26,0.12); z-index:999; 
+}
+.btn-donate-main { 
+  width:100%; background:linear-gradient(135deg,var(--saffron) 0%,var(--maroon) 100%); 
+  color:white; border:none; padding:15px; border-radius:14px; 
+  font-family:var(--font-hi); font-size:1.08rem; font-weight:700; cursor:pointer; 
+  display:flex; align-items:center; justify-content:center; gap:10px; 
+  box-shadow:0 4px 16px rgba(255,107,0,0.38); transition:transform .15s; letter-spacing:.3px; 
+}
+.btn-donate-main:active { transform:scale(0.98); }
+
+.page-header { 
+  background:linear-gradient(135deg,var(--maroon),var(--maroon-dk)); 
+  padding:0 18px; display:flex; align-items:center; gap:12px; 
+  color:white; height:56px; position:sticky; top:56px; z-index:100; 
+}
+.page-header .back-ico { 
+  background:rgba(255,255,255,.12); border:none; border-radius:8px; 
+  width:34px; height:34px; display:flex; align-items:center; justify-content:center; 
+  color:white; font-size:1rem; cursor:pointer; transition:background .2s; flex-shrink:0; 
+}
+.page-header .back-ico:hover { background:rgba(255,255,255,.2); }
+.page-header-text { flex:1; }
+.page-header-text h2 { font-size:1.05rem; font-weight:700; margin-bottom:1px; }
+.page-header-text p  { font-size:.78rem; opacity:.75; }
+
+.form-body { padding:18px 16px 96px; }
+.form-group { margin-bottom:15px; }
+.form-group label { display:flex; align-items:center; gap:6px; font-size:.85rem; color:var(--maroon); font-weight:700; margin-bottom:7px; }
+.form-group label i { color:var(--saffron); font-size:.86rem; }
+.form-control { width:100%; background:white; border:2px solid #EDD5BB; border-radius:12px; padding:12px 14px; font-size:.95rem; font-family:var(--font-hi); color:var(--txt-dk); transition:border-color .2s; outline:none; }
+.form-control:focus { border-color:var(--saffron); box-shadow:0 0 0 3px rgba(255,107,0,0.1); }
+textarea.form-control { resize:vertical; min-height:80px; }
+
+.amount-chips { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:10px; }
+.chip { background:white; border:2px solid #EDD5BB; border-radius:10px; padding:10px 6px; text-align:center; cursor:pointer; font-family:var(--font-hi); font-size:.9rem; font-weight:700; color:var(--txt-dk); transition:all .18s; }
+.chip.selected { background:var(--saffron); border-color:var(--saffron); color:white; box-shadow:0 2px 10px rgba(255,107,0,0.28); }
+.chip:hover:not(.selected) { border-color:var(--saffron); color:var(--saffron); }
+
+.btn-primary { width:100%; background:linear-gradient(135deg,var(--saffron),var(--maroon)); color:white; border:none; padding:15px; border-radius:14px; font-family:var(--font-hi); font-size:1.05rem; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px; box-shadow:0 4px 16px rgba(255,107,0,0.36); transition:transform .15s; margin-top:6px; }
+.btn-primary:active { transform:scale(0.98); }
+
+.pay-body { padding:18px 16px 96px; }
+.pay-summary { background:white; margin:14px 16px 12px; border-radius:var(--radius); padding:14px 16px; display:flex; align-items:center; justify-content:space-between; box-shadow:var(--shadow); border:2px solid var(--gold); }
+.pay-label { font-size:.76rem; color:var(--txt-lt); margin-bottom:2px; }
+.pay-amount { font-size:1.65rem; font-weight:700; color:var(--maroon); font-family:var(--font-en); }
+.pay-id     { font-size:1rem;   font-weight:700; color:var(--maroon); font-family:var(--font-en); }
+
+.timer-bar { margin:0 16px 12px; background:linear-gradient(135deg,#FFF8E1,#FFF3E0); border:2px solid var(--gold); border-radius:12px; padding:10px 13px; display:flex; align-items:center; gap:10px; }
+.timer-ico { font-size:1.4rem; color:var(--gold); animation:tick 1s step-end infinite; }
+@keyframes tick { 50%{opacity:.4} }
+.timer-lbl { font-size:.73rem; color:var(--txt-lt); }
+.timer-val { font-size:1.25rem; font-weight:700; color:var(--maroon); font-family:var(--font-en); }
+.timer-val.urgent { color:#E53E3E; animation:blink .5s ease infinite; }
+@keyframes blink { 50%{opacity:.5} }
+.btn-refresh { margin-left:auto; background:var(--saffron-pale); border:1px solid var(--saffron); color:var(--saffron); padding:5px 9px; border-radius:8px; font-size:.72rem; cursor:pointer; font-family:var(--font-hi); transition:all .2s; }
+
+.pay-tabs { display:flex; margin:0 16px 12px; background:#EDD5BB; border-radius:12px; padding:4px; gap:4px; }
+.pay-tab { flex:1; padding:9px; border:none; background:none; border-radius:10px; font-family:var(--font-hi); font-size:.85rem; color:var(--txt-md); cursor:pointer; transition:all .2s; display:flex; align-items:center; justify-content:center; gap:5px; }
+.pay-tab.active { background:white; color:var(--maroon); font-weight:700; box-shadow:0 2px 8px rgba(0,0,0,.1); }
+
+.pay-panel { display:none; }
+.pay-panel.active { display:block; }
+
+.qr-box { background:white; margin:0 16px 12px; border-radius:var(--radius); padding:20px; text-align:center; box-shadow:var(--shadow); }
+.qr-wrap { display:inline-block; padding:10px; background:white; border:3px solid var(--gold); border-radius:12px; box-shadow:0 4px 14px rgba(212,160,23,0.16); margin-bottom:14px; }
+#qrCanvas { display:block; }
+.qr-download-btn { background: var(--saffron); color: white; border: none; padding: 10px 16px; border-radius: 8px; font-family: var(--font-hi); font-size: 0.85rem; font-weight: 700; cursor: pointer; margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; transition: transform 0.15s; }
+.qr-download-btn:active { transform: scale(0.98); }
+
+.upi-panel { background:white; margin:0 16px 12px; border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); }
+.upi-info-card { background:linear-gradient(135deg,var(--saffron-pale),#FFF8F0); border:2px solid var(--gold); border-radius:12px; padding:14px 16px; margin-bottom:14px; }
+.upi-info-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+.upi-info-row:last-child { margin-bottom:0; }
+.upi-info-label { font-size:.73rem; color:var(--txt-lt); font-weight:600; }
+.upi-info-val { font-size:.92rem; font-weight:700; color:var(--maroon); font-family:var(--font-en); }
+.upi-amount-val { font-size:1.2rem; font-weight:700; color:var(--green); font-family:var(--font-en); }
+.upi-id-row { background:var(--saffron-pale); border:2px dashed var(--saffron); border-radius:10px; padding:13px; display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.upi-id-text { font-size:.98rem; font-weight:700; color:var(--maroon); font-family:var(--font-en); }
+.btn-copy-upi { background:var(--saffron); color:white; border:none; padding:9px 14px; border-radius:9px; font-family:var(--font-hi); font-size:.82rem; cursor:pointer; display:flex; align-items:center; gap:5px; transition:background .2s; font-weight:700; }
+.btn-copy-upi.copied { background:var(--green); }
+
+.steps { list-style:none; margin:10px 0 13px; }
+.steps li { display:flex; align-items:flex-start; gap:9px; padding:5px 0; font-size:.81rem; color:var(--txt-md); }
+.step-n { width:20px; height:20px; border-radius:50%; background:var(--saffron); color:white; display:flex; align-items:center; justify-content:center; font-size:.67rem; font-weight:700; flex-shrink:0; font-family:var(--font-en); }
+
+.utr-card { background:white; margin:16px; border-radius:var(--radius); padding:24px 20px; box-shadow:var(--shadow); }
+.utr-icon-wrap { text-align:center; margin-bottom:13px; }
+.utr-icon-wrap i { font-size:2.7rem; color:var(--gold); }
+.utr-title { text-align:center; font-size:1rem; color:var(--maroon); font-weight:700; margin-bottom:5px; }
+.utr-sub { text-align:center; font-size:.79rem; color:var(--txt-lt); margin-bottom:18px; line-height:1.6; }
+.utr-input { width:100%; padding:13px 14px; border:2px solid #EDD5BB; border-radius:12px; font-size:1rem; font-family:var(--font-en); color:var(--txt-dk); outline:none; text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; }
+.utr-input:focus { border-color:var(--saffron); box-shadow:0 0 0 3px rgba(255,107,0,0.1); }
+
+.utr-body { padding:18px 16px 96px; }
+
+#screen5 { padding-bottom:96px; }
+
+.success-header {
+  background: linear-gradient(135deg,#4A0A0A,var(--maroon));
+  padding: 16px 20px; text-align:center;
+}
+.success-header-txt { color:var(--gold-lt); font-size:1rem; font-weight:700; }
+
+.donation-card {
+  margin: 16px;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(92,15,15,0.28);
+  position: relative;
+  background: linear-gradient(160deg, #4A0A0A 0%, #8B1A1A 35%, #C0392B 60%, #FF6B00 100%);
+}
+.donation-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 8L45 26L63 26L49 37L54 55L40 44L26 55L31 37L17 26L35 26Z' fill='rgba(255,215,0,0.05)'/%3E%3C/svg%3E") repeat;
+  pointer-events:none;
+}
+
+.card-temple-img { width:100%; height:130px; object-fit:cover; display:block; filter: brightness(0.6) saturate(1.2); }
+.card-temple-placeholder { width:100%; height:130px; background: linear-gradient(135deg,#2C0A0A,#5C1A1A); display:flex; align-items:center; justify-content:center; }
+.card-temple-placeholder span { font-size:3rem; }
+.card-overlay-top { position:absolute; top:0; left:0; right:0; height:130px; background: linear-gradient(to bottom, transparent 40%, rgba(74,10,10,0.85)); pointer-events:none; }
+.card-temple-label { position:absolute; top:8px; left:12px; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); border:1px solid rgba(245,200,66,0.4); border-radius:20px; padding:4px 10px; color:var(--gold-lt); font-size:.65rem; font-weight:700; display:flex; align-items:center; gap:5px; }
+
+.card-body { padding: 20px 20px 22px; position: relative; z-index: 1; }
+.card-om { text-align:center; font-size:1.6rem; color:var(--gold-lt); text-shadow:0 0 18px rgba(245,200,66,0.6); margin-bottom:4px; display:block; animation: omGlow 3s ease-in-out infinite; }
+@keyframes omGlow { 50%{ text-shadow:0 0 28px rgba(245,200,66,0.9); } }
+
+.card-badge-row { display:flex; justify-content:center; margin-bottom:14px; }
+.card-badge { background: rgba(212,160,23,0.2); border:1.5px solid rgba(212,160,23,0.5); border-radius:20px; padding:4px 14px; color:var(--gold-lt); font-size:.72rem; font-weight:700; letter-spacing:.5px; }
+
+.card-donor-label { text-align:center; color:rgba(255,255,255,0.65); font-size:.75rem; font-weight:500; letter-spacing:.8px; text-transform:uppercase; margin-bottom:4px; }
+.card-donor-name { text-align:center; font-family: var(--font-display); font-size: 2.1rem; font-weight:900; color: white; text-shadow: 0 2px 16px rgba(0,0,0,0.5); line-height:1.1; margin-bottom:16px; letter-spacing:-.5px; }
+
+.card-amount-box { background: rgba(255,255,255,0.1); backdrop-filter:blur(8px); border: 2px solid rgba(245,200,66,0.4); border-radius: 16px; padding: 14px 20px; text-align:center; margin-bottom:16px; }
+.card-amount-label { color:rgba(255,255,255,0.6); font-size:.72rem; font-weight:600; letter-spacing:.8px; text-transform:uppercase; margin-bottom:4px; }
+.card-amount-value { font-family: var(--font-display); font-size: 3rem; font-weight:900; color: var(--gold-lt); text-shadow: 0 2px 20px rgba(212,160,23,0.5); letter-spacing:-1px; line-height:1; }
+
+.card-meta-row { display:flex; gap:8px; margin-bottom:14px; }
+.card-meta-item { flex:1; background:rgba(0,0,0,0.22); border-radius:10px; padding:8px 10px; text-align:center; }
+.card-meta-lbl { color:rgba(255,255,255,0.5); font-size:.62rem; font-weight:600; text-transform:uppercase; letter-spacing:.5px; margin-bottom:2px; }
+.card-meta-val { color:rgba(255,255,255,0.9); font-size:.76rem; font-weight:700; font-family:var(--font-en); }
+
+.card-blessings { text-align:center; color:rgba(255,255,255,0.7); font-size:.78rem; line-height:1.7; font-weight:500; padding:0 4px; }
+.card-blessings strong { color:var(--gold-lt); }
+
+.card-footer-strip { background: rgba(0,0,0,0.3); padding:10px 20px; display:flex; align-items:center; justify-content:space-between; }
+.card-footer-left { color:rgba(255,255,255,0.5); font-size:.65rem; }
+.card-footer-right { background: var(--saffron); border-radius:12px; padding:3px 10px; color:white; font-size:.65rem; font-weight:700; }
+
+.success-sticky {
+  position:fixed; bottom:0; left:0; right:0;
+  padding:10px 12px; background:rgba(253,246,236,0.97); backdrop-filter:blur(12px);
+  box-shadow:0 -4px 18px rgba(139,26,26,0.12); z-index:999;
+  display:flex; gap:9px;
+}
+.btn-success-wa {
+  flex:1; display:flex; align-items:center; justify-content:center; gap:7px;
+  background:linear-gradient(135deg,#25D366,#128C7E); color:white; border:none;
+  padding:13px 10px; border-radius:12px;
+  font-family:var(--font-hi); font-size:.88rem; font-weight:700; cursor:pointer;
+  box-shadow:0 3px 12px rgba(37,211,102,0.3); text-decoration:none;
+}
+.btn-success-new {
+  flex:1; display:flex; align-items:center; justify-content:center; gap:7px;
+  background:transparent; border:2px solid var(--maroon); color:var(--maroon);
+  padding:13px 10px; border-radius:12px;
+  font-family:var(--font-hi); font-size:.88rem; font-weight:700; cursor:pointer;
+}
+
+.toast { position:fixed; bottom:76px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--txt-dk); color:white; padding:9px 18px; border-radius:24px; font-family:var(--font-hi); font-size:.85rem; opacity:0; transition:all .3s; z-index:9999; white-space:nowrap; pointer-events:none; }
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+.spacer { height:20px; }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-brand">
+    <i class="fa-solid fa-om"></i>
+    <span>जय श्री राम</span>
+  </div>
+  <div class="navbar-actions">
+    <a href="https://wa.me/919122012315?text=मुझे+रामचौड़ा+मंदिर+निर्माण+सहयोग+के+लिए+पेमेंट+करने+में+मदद+चाहिए+" target="_blank"  class="btn-nav-help">
+      <i class="fa-solid fa-headset"></i> मदद चाहिए
+    </a>
+    <a href="#" id="navWaBtn" target="_blank" class="btn-nav-wa">
+      <i class="fa-brands fa-whatsapp"></i> ग्रुप
+    </a>
+  </div>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<!-- SCREEN 1: LANDING (from rc/) -->
+<div class="screen active" id="screen1">
+  <div class="parichay-card">
+    <img src="/rc/assets/mandir.png" alt="रामचौरा मंदिर" class="parichay-img"
+         onerror="this.style.background='linear-gradient(135deg,#8B1A1A,#FF6B00)';this.style.height='80px';">
+    <div class="parichay-body">
+      <h3><i class="fa-solid fa-place-of-worship"></i> मंदिर का परिचय</h3>
+      <p>
+        हरिपुर (हाजीपुर)के रामचौरा धाम मंदिर का संबंध रामायण काल की उन महत्वपूर्ण घटनाओं से है जब महर्षि विश्वामित्र, भगवान श्री राम और लक्ष्मण को अपने साथ मिथिला (जनकपुर) ले जा रहे थे। तब उन सभी ने इस जगह पर रात्रि विश्राम किया था।
+        <br><br><a href="/rc/assets/राम_चौड़ा_मंदिर.pdf" target="_blank">विस्तृत इतिहास पढ़ें</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="sec-title"><i class="fa-solid fa-rotate"></i> मंदिर — अभी और कल</div>
+  <p class="flip-hint"><i class="fa-solid fa-hand-pointer"></i>&nbsp;तस्वीर पर क्लिक करें</p>
+  <div class="flip-grid">
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <img src="/rc/assets/before.png" alt="वर्तमान स्थिति" onerror="this.style.display='none';this.parentElement.style.background='#5C0F0F';">
+          <div class="flip-front-lbl">वर्तमान स्थिति (अधूरा निर्माण)</div>
+        </div>
+        <div class="flip-back">
+          <img src="/rc/assets/after.png" alt="भविष्य" onerror="this.style.display='none';">
+          <div class="flip-back-txt">🌟 आपके सहयोग से ऐसा जल्द बन सकता है!</div>
+        </div>
+      </div>
+    </div>
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <img src="/rc/assets/after.png" alt="पूर्ण मंदिर" onerror="this.style.display='none';this.parentElement.style.background='#5C0F0F';">
+          <div class="flip-front-lbl">पूर्ण मंदिर की कल्पना</div>
+        </div>
+        <div class="flip-back">
+          <img src="/rc/assets/before.png" alt="अभी" onerror="this.style.display='none';">
+          <div class="flip-back-txt">🏗️ अभी निर्माण जारी है — आपकी मदद चाहिए</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="needs-card">
+    <p class="needs-head"><i class="fa-solid fa-triangle-exclamation" style="color:var(--saffron)"></i> अधूरे कार्य</p>
+    <ul class="needs-list">
+      <li><i class="fa-solid fa-paintbrush"></i>   मंदिर की पुताई एवं सजावट                <span class="badge pending">बाकी है</span></li>
+      <li><i class="fa-solid fa-door-open"></i>    मुख्य द्वार एवं प्रवेश निर्माण          <span class="badge pending">बाकी है</span></li>
+      <li><i class="fa-solid fa-lightbulb"></i>   बिजली एवं लाइटिंग व्यवस्था              <span class="badge progress">जारी है</span></li>
+      <li><i class="fa-solid fa-trowel-bricks"></i>फर्श और संगमरमर का काम                 <span class="badge pending">बाकी है</span></li>
+      <li><i class="fa-solid fa-faucet"></i>       जल आपूर्ति एवं शौचालय                   <span class="badge pending">बाकी है</span></li>
+      <li><i class="fa-solid fa-bell"></i>          घंटा एवं धार्मिक उपकरण                  <span class="badge progress">जारी है</span></li>
+    </ul>
+  </div>
+
+  <div class="people-section">
+    <div class="sec-title" style="padding-bottom:10px;">
+      <i class="fa-solid fa-users"></i> ईश्वरीय कार्य की पूर्णता के निमित्त एक अडिग प्रयास
+    </div>
+    <div class="people-scroll">
+      <div class="person-card">
+        <img src="/rc/assets/rajeev.png" alt="राजीव ब्रह्मर्षि"
+             onerror="this.style.height='60px';this.style.background='var(--saffron-pale)';">
+        <div class="person-body">
+          <div class="person-name">राजीव ब्रह्मर्षि</div>
+          <span class="person-post"><a href="https://hinduputra.org" target="_blank">हिन्दू पुत्र संगठन</a> - संस्थापक</span>
+          <p class="person-para">मंदिर का अधुरा निर्माण पूरा करने के लिए | जब तक प्लास्टर न हो जाए, तब तक नंगे पाँव रहने का कठोर प्रण लिया है |</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sticky-donate">
+    <button class="btn-donate-main" onclick="onDaanClick()">
+      <i class="fa-solid fa-hand-holding-heart"></i>
+      दान करें — मंदिर निर्माण में सहयोग
+    </button>
+  </div>
+</div>
+
+<!-- SCREEN 2: DONOR DETAILS -->
+<div class="screen" id="screen2">
+  <div class="page-header">
+    <button class="back-ico" onclick="goToScreen(1)"><i class="fa-solid fa-arrow-left"></i></button>
+    <div class="page-header-text">
+      <h2>दानकर्ता विवरण</h2>
+      <p>कृपया अपनी जानकारी भरें</p>
+    </div>
+  </div>
+
+  <div class="form-body">
+    <div class="form-group">
+      <label><i class="fa-solid fa-user"></i> आपका नाम *</label>
+      <input type="text" class="form-control" id="donorName" placeholder="जैसे: राम कुमार शर्मा">
+    </div>
+    <div class="form-group">
+      <label><i class="fa-solid fa-phone"></i> मोबाइल नंबर *</label>
+      <input type="tel" class="form-control" id="donorPhone" placeholder="10 अंकों का नंबर" maxlength="10" pattern="[0-9]{10}">
+    </div>
+    <div class="form-group">
+      <label><i class="fa-solid fa-location-dot"></i> पता (वैकल्पिक)</label>
+      <input type="text" class="form-control" id="donorAddress" placeholder="गाँव / शहर / जिला">
+    </div>
+    <div class="form-group">
+      <label><i class="fa-solid fa-comment-dots"></i> विचार / फीडबैक (वैकल्पिक)</label>
+      <textarea class="form-control" id="donorFeedback" placeholder="मंदिर के बारे में अपने विचार, सुझाव या आशीर्वाद यहाँ लिखें..." rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label><i class="fa-solid fa-indian-rupee-sign"></i> दान राशि *</label>
+      <div class="amount-chips">
+        <div class="chip" onclick="selectChip(101,this)">₹101</div>
+        <div class="chip" onclick="selectChip(201,this)">₹201</div>
+        <div class="chip" onclick="selectChip(501,this)">₹501</div>
+        <div class="chip" onclick="selectChip(1001,this)">₹1001</div>
+        <div class="chip" onclick="selectChip(5001,this)">₹5001</div>
+        <div class="chip" onclick="selectChip(11111,this)">₹11111</div>
+      </div>
+      <input type="number" class="form-control" id="donorAmount" placeholder="या अपनी राशि दर्ज करें..." min="1" oninput="onManualAmount()">
+    </div>
+  </div>
+
+  <div class="sticky-support">
+     <button class="btn-primary" onclick="proceedToPayment()">
+      <i class="fa-solid fa-arrow-right"></i> भुगतान पृष्ठ पर जाएँ
+    </button>
+  </div>
+</div>
+
+<!-- SCREEN 3: PAYMENT -->
+<div class="screen" id="screen3">
+  <div class="page-header">
+    <button class="back-ico" onclick="goBackToForm()"><i class="fa-solid fa-arrow-left"></i></button>
+    <div class="page-header-text">
+      <h2>भुगतान करें</h2>
+      <p>UPI से सुरक्षित दान</p>
+    </div>
+  </div>
+
+  <div class="pay-body">
+    <div class="pay-summary">
+      <div>
+        <div class="pay-label">दान राशि</div>
+        <div class="pay-amount">₹<span id="displayAmount">0</span></div>
+      </div>
+      <div style="text-align:right">
+        <div class="pay-label">भुगतान ID</div>
+        <div class="pay-id" id="displayPaymentId">—</div>
+      </div>
+    </div>
+
+    <div class="timer-bar">
+      <i class="fa-regular fa-clock timer-ico"></i>
+      <div>
+        <div class="timer-lbl">QR समय सीमा</div>
+        <div class="timer-val" id="timerDisplay">05:00</div>
+      </div>
+      <button class="btn-refresh" onclick="restartTimer()">
+        <i class="fa-solid fa-rotate-right"></i> नया QR
+      </button>
+    </div>
+
+    <div class="pay-tabs">
+      <button class="pay-tab active" onclick="switchTab('scan')" id="tabScan">
+        <i class="fa-solid fa-qrcode"></i> Scan & Pay
+      </button>
+      <button class="pay-tab" onclick="switchTab('copy')" id="tabCopy">
+        <i class="fa-solid fa-copy"></i> UPI Copy
+      </button>
+    </div>
+
+    <div class="pay-panel active" id="panelScan">
+      <div class="qr-box">
+        <div class="qr-wrap"><div id="qrCanvas"></div></div>
+        <button class="qr-download-btn" onclick="downloadQR()">
+          <i class="fa-solid fa-download"></i> QR डाउनलोड करें
+        </button>
+      </div>
+    </div>
+
+    <div class="pay-panel" id="panelCopy">
+      <div class="upi-panel">
+        <p style="font-size:.88rem;color:var(--maroon);font-weight:700;margin-bottom:12px;">
+          <i class="fa-solid fa-at" style="color:var(--saffron)"></i> UPI ID से भुगतान करें
+        </p>
+
+        <div class="upi-info-card">
+          <div class="upi-info-row">
+            <span class="upi-info-label">📛 नाम</span>
+            <span class="upi-info-val" id="upiNameDisplay">Ganpati Cement Bhandar</span>
+          </div>
+          <div class="upi-info-row">
+            <span class="upi-info-label">💰 राशि</span>
+            <span class="upi-amount-val">₹<span id="upiAmountDisplay">0</span></span>
+          </div>
+        </div>
+
+        <div class="upi-id-row">
+          <div class="upi-id-text" id="upiIdDisplay">9955623872@okbizaxis</div>
+          <button class="btn-copy-upi" id="copyUpiBtn" onclick="copyUpiId()">
+            <i class="fa-regular fa-copy"></i>कॉपी करें
+          </button>
+        </div>
+
+        <ul class="steps">
+          <li><span class="step-n">1</span>ऊपर UPI ID कॉपी करें</li>
+          <li><span class="step-n">2</span>UPI App खोलें (PhonePe / GPay / Paytm)</li>
+          <li><span class="step-n">3</span>Send Money / Pay पर जाएँ</li>
+          <li><span class="step-n">4</span>UPI ID पेस्ट करें और ऊपर दिखाई राशि डालें</li>
+          <li><span class="step-n">5</span>भुगतान पूरा करें</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+  </div>
+
+  <div class="sticky-support">
+    <button class="btn-support-sticky" onclick="openSupportChat()">
+      <i class="fa-solid fa-headset"></i> सहायता
+    </button>
+    <button class="btn-payment-sticky" onclick="goToScreen(4)">
+      <i class="fa-solid fa-check-circle"></i> भुगतान हो गया
+    </button>
+  </div>
+</div>
+
+<!-- SCREEN 4: UTR ENTRY -->
+<div class="screen" id="screen4">
+  <div class="page-header">
+    <button class="back-ico" onclick="goToScreen(3)"><i class="fa-solid fa-arrow-left"></i></button>
+    <div class="page-header-text">
+      <h2>भुगतान की पुष्टि</h2>
+      <p>UTR नंबर दर्ज करें</p>
+    </div>
+  </div>
+
+  <div class="utr-body">
+    <div class="utr-card">
+      <div class="utr-icon-wrap"><i class="fa-solid fa-receipt"></i></div>
+      <div class="utr-title">UTR नंबर दर्ज करें</div>
+      <div class="utr-sub">
+        UPI भुगतान के बाद SMS / App में मिला<br>
+        12 अंकों का UTR / Reference नंबर दर्ज करें
+      </div>
+      <input type="text" class="utr-input" id="utrInput" placeholder="UTR / Reference Number" maxlength="20">
+      <div class="form-group" style="margin-bottom:16px;">
+        <label style="font-size:.84rem;color:var(--maroon);font-weight:700;display:flex;align-items:center;gap:6px;margin-bottom:7px;">
+          <i class="fa-solid fa-indian-rupee-sign" style="color:var(--saffron)"></i> भुगतान राशि
+        </label>
+        <input type="number" class="form-control" id="utrAmount" placeholder="₹ भुगतान की राशि" min="1">
+      </div>
+    </div>
+  </div>
+
+  <div class="sticky-support">
+    <button class="btn-support-sticky" onclick="openSupportChat()">
+      <i class="fa-solid fa-headset"></i> सहायता
+    </button>
+    <button class="btn-payment-sticky" onclick="verifyPayment()">
+      <i class="fa-solid fa-check-circle"></i> पुष्टि करें
+    </button>
+  </div>
+</div>
+
+<!-- SCREEN 5: SUCCESS CARD -->
+<div class="screen" id="screen5">
+
+  <div class="success-header">
+    <div class="success-header-txt">🙏 धन्यवाद — जय श्री राम! 🚩</div>
+  </div>
+
+  <div class="donation-card" id="donationCard">
+    <div style="position:relative;">
+      <img src="/rc/assets/before.png" alt="रामचौरा मंदिर" class="card-temple-img"
+           onerror="this.outerHTML='<div class=\'card-temple-placeholder\'><span>🛕</span></div>'">
+      <div class="card-overlay-top"></div>
+      <div class="card-temple-label">
+        <i class="fa-solid fa-place-of-worship"></i>
+        रामचौरा मंदिर, हरिपुर
+      </div>
+    </div>
+
+    <div class="card-body">
+      <span class="card-om">ॐ</span>
+      <div class="card-badge-row">
+        <div class="card-badge">🙏 दान पावती · Donation Receipt</div>
+      </div>
+
+      <div class="card-donor-label">दान किया</div>
+      <div class="card-donor-name" id="cardDonorName">—</div>
+
+      <div class="card-amount-box">
+        <div class="card-amount-label">दान राशि · Donation Amount</div>
+        <div class="card-amount-value">₹<span id="cardAmount">—</span></div>
+      </div>
+
+      <div class="card-meta-row">
+        <div class="card-meta-item">
+          <div class="card-meta-lbl">भुगतान ID</div>
+          <div class="card-meta-val" id="cardPayId">—</div>
+        </div>
+        <div class="card-meta-item">
+          <div class="card-meta-lbl">दिनांक</div>
+          <div class="card-meta-val" id="cardDate">—</div>
+        </div>
+        <div class="card-meta-item">
+          <div class="card-meta-lbl">स्थिति</div>
+          <div class="card-meta-val" style="color:#4ade80;">✓ पूर्ण</div>
+        </div>
+      </div>
+
+      <div class="card-blessings">
+        आपके इस पुण्य दान से मंदिर निर्माण को बल मिलेगा।<br>
+        <strong>भगवान राम आपको सुख, समृद्धि और आशीर्वाद दें।</strong> 🌸
+      </div>
+    </div>
+
+    <div class="card-footer-strip">
+      <div class="card-footer-left">haripur.in</div>
+      <div class="card-footer-right">जय श्री राम 🚩</div>
+    </div>
+  </div>
+
+  <div class="success-sticky">
+    <button class="btn-success-new" onclick="startNewDonation()">
+      <i class="fa-solid fa-rotate-left"></i> नया दान करें
+    </button>
+    <a href="#" id="waShareBtn" target="_blank" class="btn-success-wa">
+      <i class="fa-brands fa-whatsapp"></i> शेयर करें
+    </a>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+const CONFIG = {
+  UPI_ID:          '9955623872@okbizaxis',
+  UPI_NAME:        'Ganpati Cement Bhandar',
+  WHATSAPP_GROUP:  'https://chat.whatsapp.com/Jx4ljFc9L2MECi278ALx5Y',
+  SUPPORT_PHONE:   '919122012315',
+  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwRZWuZaLjBsXVYnVN2ewH6dwNwFghPzERcM-qtG1sBEvzyNMTSJuubb7T0DJeZK80TLA/exec',
+  BASE_URL:        window.location.origin + '/rc/mandir-nirman/',
+};
+
+const S = {
+  sessionId:      Math.random().toString(36).substr(2,8).toUpperCase(),
+  paymentId:      null,
+  referredBy:     null,
+  name:'', phone:'', address:'', feedback:'', amount:0,
+  pageStart:      Date.now(),
+  payScreenStart: null,
+  payScreenSecs:  0,
+  timerInterval:  null,
+  timerSecs:      300,
+};
+
+const ts      = () => new Date().toISOString();
+const elapsed = () => Math.round((Date.now() - S.pageStart) / 1000);
+
+function getUrlParams() {
+  const p = new URLSearchParams(window.location.search);
+  return {
+    n: p.get('n') || '',
+    no: p.get('no') || '',
+    add: p.get('add') || '',
+    am: p.get('am') || '',
+    ref: p.get('ref') || '',
+  };
+}
+
+function fire(data) {
+  if (!CONFIG.APPS_SCRIPT_URL || CONFIG.APPS_SCRIPT_URL.includes('YOUR')) return;
+  [0, 900, 2200].forEach(delay => {
+    setTimeout(() => {
+      fetch(CONFIG.APPS_SCRIPT_URL, {
+        method:'POST', mode:'no-cors',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(data),
+      }).catch(()=>{});
+    }, delay);
+  });
+}
+
+function buildSupportUrl(extra) {
+  const lines = [
+    '🙏 *रामचौरा मंदिर दान — सहायता*',
+    '',
+    `👤 नाम: ${S.name || '—'}`,
+    `📱 मोबाइल: ${S.phone || '—'}`,
+    `💰 राशि: ₹${S.amount || '—'}`,
+    `🆔 भुगतान ID: ${S.paymentId || '—'}`,
+    `🔑 Session: ${S.sessionId}`,
+  ];
+  if (extra) lines.push('', extra);
+  const msg = encodeURIComponent(lines.join('\n'));
+  return `https://wa.me/${CONFIG.SUPPORT_PHONE}?text=${msg}`;
+}
+
+function buildShareUrl() {
+  const text = [
+    '🙏 *जय श्री राम!*',
+    '',
+    `मैंने *रामचौरा मंदिर* निर्माण में *₹${S.amount ? S.amount.toLocaleString('hi-IN') : '—'}* का दान दिया।`,
+    `👤 ${S.name || ''}`,
+    '',
+    '🚩 आप भी इस पुण्य कार्य में सहयोग दें:',
+    CONFIG.BASE_URL + (S.paymentId ? '?ref=' + S.paymentId : ''),
+    '',
+    '📍 रामचौरा मंदिर, हाजीपुर, वैशाली, बिहार',
+  ].join('\n');
+  return `https://wa.me/?text=${encodeURIComponent(text)}`;
+}
+
+function openSupportChat() {
+  window.open(buildSupportUrl(''), '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const p = getUrlParams();
+
+  if (p.n)   { document.getElementById('donorName').value    = p.n;   S.name    = p.n; }
+  if (p.no)  { document.getElementById('donorPhone').value   = p.no;  S.phone   = p.no; }
+  if (p.add) { document.getElementById('donorAddress').value = p.add; S.address = p.add; }
+  if (p.am)  {
+    const a = parseInt(p.am);
+    if (a > 0) { S.amount = a; document.getElementById('donorAmount').value = a; highlightChip(a); }
+  }
+  if (p.ref) S.referredBy = p.ref;
+
+  document.getElementById('navWaBtn').href = CONFIG.WHATSAPP_GROUP;
+  document.getElementById('upiIdDisplay').textContent  = CONFIG.UPI_ID;
+  document.getElementById('upiNameDisplay').textContent = CONFIG.UPI_NAME;
+
+  fire({ action:'visit', sessionId:S.sessionId, referredBy:S.referredBy||'', url: '/rc/mandir-nirman/', ts:ts() });
+
+  window.addEventListener('beforeunload', () => {
+    fire({ action:'event', event:'page_exit', sessionId:S.sessionId, url: '/rc/mandir-nirman/', timeSpent:elapsed(), ts:ts() });
+  });
+});
+
+function goToScreen(n) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen' + n).classList.add('active');
+  window.scrollTo(0, 0);
+  if (n === 3) { S.payScreenStart = Date.now(); startTimer(); generateQR(); }
+}
+
+function goBackToForm() {
+  clearInterval(S.timerInterval);
+  goToScreen(2);
+}
+
+function onDaanClick() {
+  fire({ action:'event', event:'daan_click', sessionId:S.sessionId, timeSpent:elapsed(), ts:ts() });
+  goToScreen(2);
+}
+
+function selectChip(amt, el) {
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  S.amount = amt;
+  document.getElementById('donorAmount').value = amt;
+}
+
+function onManualAmount() {
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  S.amount = parseInt(document.getElementById('donorAmount').value) || 0;
+}
+
+function highlightChip(amt) {
+  document.querySelectorAll('.chip').forEach(c => {
+    if (parseInt(c.textContent.replace('₹','')) === amt) c.classList.add('selected');
+  });
+}
+
+function proceedToPayment() {
+  const name     = document.getElementById('donorName').value.trim();
+  const phone    = document.getElementById('donorPhone').value.trim();
+  const addr     = document.getElementById('donorAddress').value.trim();
+  const feedback = document.getElementById('donorFeedback').value.trim();
+  const amt      = S.amount || parseInt(document.getElementById('donorAmount').value);
+
+  if (!name)                       { showToast('कृपया अपना नाम दर्ज करें'); return; }
+  if (!phone || phone.length !== 10){ showToast('कृपया सही 10 अंकों का नंबर दर्ज करें'); return; }
+  if (!amt || amt < 1)             { showToast('कृपया दान राशि चुनें'); return; }
+
+  S.name = name; S.phone = phone; S.address = addr; S.feedback = feedback; S.amount = amt;
+  S.paymentId = 'RC' + (100000 + Math.floor(Math.random() * 899999));
+
+  document.getElementById('displayAmount').textContent    = amt.toLocaleString('hi-IN');
+  document.getElementById('displayPaymentId').textContent = S.paymentId;
+  document.getElementById('upiAmountDisplay').textContent = amt.toLocaleString('hi-IN');
+  document.getElementById('utrAmount').value              = amt;
+
+  goToScreen(3);
+
+  fire({
+    action:'register', sessionId:S.sessionId, paymentId:S.paymentId,
+    referredBy:S.referredBy||'', name, phone, address:addr, feedback,
+    amount:amt, timeSpent:elapsed(), ts:ts(),
+  });
+}
+
+function startTimer() {
+  S.timerSecs = 300;
+  clearInterval(S.timerInterval);
+  updateTimer();
+  S.timerInterval = setInterval(() => {
+    S.timerSecs--;
+    updateTimer();
+    if (S.timerSecs <= 0) clearInterval(S.timerInterval);
+  }, 1000);
+}
+
+function restartTimer() {
+  clearInterval(S.timerInterval);
+  S.timerSecs = 300;
+  startTimer();
+  generateQR();
+  showToast('QR नया हो गया ✓');
+}
+
+function updateTimer() {
+  const m  = Math.floor(S.timerSecs/60).toString().padStart(2,'0');
+  const s  = (S.timerSecs%60).toString().padStart(2,'0');
+  const el = document.getElementById('timerDisplay');
+  if (el) { el.textContent = m+':'+s; el.classList.toggle('urgent', S.timerSecs<=60); }
+}
+
+function generateQR() {
+  const note = encodeURIComponent(S.paymentId + '-' + S.phone);
+  const url  = `upi://pay?pa=${CONFIG.UPI_ID}&pn=${encodeURIComponent(CONFIG.UPI_NAME)}&am=${S.amount}&tn=${note}&cu=INR`;
+  const wrap = document.getElementById('qrCanvas');
+  wrap.innerHTML = '';
+  if (typeof QRCode !== 'undefined') {
+    new QRCode(wrap, { text:url, width:200, height:200, colorDark:'#5C0F0F', colorLight:'#FFFFFF', correctLevel:QRCode.CorrectLevel.M });
+  }
+}
+
+function downloadQR() {
+  const canvas = document.querySelector('#qrCanvas canvas');
+  if (canvas) {
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL();
+    link.download = 'QR_' + S.paymentId + '.png';
+    link.click();
+    showToast('QR डाउनलोड हो गया ✓');
+  }
+}
+
+function switchTab(tab) {
+  document.getElementById('tabScan').classList.toggle('active', tab==='scan');
+  document.getElementById('tabCopy').classList.toggle('active', tab==='copy');
+  document.getElementById('panelScan').classList.toggle('active', tab==='scan');
+  document.getElementById('panelCopy').classList.toggle('active', tab==='copy');
+}
+
+function copyUpiId() {
+  navigator.clipboard.writeText(CONFIG.UPI_ID).then(() => {
+    const b = document.getElementById('copyUpiBtn');
+    b.textContent='✓ कॉपी हुआ'; b.classList.add('copied');
+    showToast('UPI ID कॉपी हो गया!');
+    setTimeout(() => { b.innerHTML='<i class="fa-regular fa-copy"></i>कॉपी करें'; b.classList.remove('copied'); }, 3000);
+  }).catch(() => showToast('मैन्युअली: '+CONFIG.UPI_ID));
+}
+
+function verifyPayment() {
+  const utr = document.getElementById('utrInput').value.trim();
+  const amt = parseInt(document.getElementById('utrAmount').value);
+
+  if (!utr || utr.length < 6) { showToast('कृपया सही UTR नंबर दर्ज करें'); return; }
+  if (!amt || amt < 1)         { showToast('कृपया राशि दर्ज करें'); return; }
+
+  if (S.payScreenStart) S.payScreenSecs = Math.round((Date.now()-S.payScreenStart)/1000);
+
+  fire({
+    action:'payment', sessionId:S.sessionId, paymentId:S.paymentId,
+    name:S.name, phone:S.phone, address:S.address, feedback:S.feedback,
+    amountRegistered:S.amount, amountConfirmed:amt,
+    referredBy:S.referredBy||'', utr,
+    status:'UTR_SUBMITTED',
+    payScreenSecs:S.payScreenSecs, timeSpent:elapsed(), ts:ts(),
+  });
+
+  document.getElementById('cardDonorName').textContent = S.name || '—';
+  document.getElementById('cardAmount').textContent    = (amt||S.amount||0).toLocaleString('hi-IN');
+  document.getElementById('cardPayId').textContent     = S.paymentId || '—';
+  const now = new Date();
+  document.getElementById('cardDate').textContent      =
+    now.getDate().toString().padStart(2,'0') + '/' +
+    (now.getMonth()+1).toString().padStart(2,'0') + '/' +
+    now.getFullYear();
+
+  document.getElementById('waShareBtn').href = buildShareUrl();
+
+  goToScreen(5);
+}
+
+function startNewDonation() {
+  S.amount=0; S.paymentId=null; S.feedback='';
+  document.getElementById('donorAmount').value='';
+  document.getElementById('donorFeedback').value='';
+  document.getElementById('utrInput').value='';
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('selected'));
+  goToScreen(2);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3200);
+}
+</script>
+
+</body>
+</html>
